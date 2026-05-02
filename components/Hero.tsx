@@ -8,7 +8,7 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-neutral-50">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-12 lg:py-20">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:gap-12 lg:py-20">
         <div className="order-2 flex flex-col justify-center text-center lg:order-1 lg:text-left">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-neutral-500">
             Impressão 3D sob medida
@@ -16,7 +16,7 @@ export function Hero() {
           <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl lg:text-5xl">
             Você imagina. A gente cria.
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-neutral-600 sm:text-xl lg:mx-0">
+          <p className="mt-4 w-full text-lg leading-relaxed text-neutral-600 sm:text-xl">
             Transforme qualquer ideia em um objeto real — sem precisar saber modelar ou desenhar.
           </p>
 
@@ -41,7 +41,7 @@ export function Hero() {
             </Link>
           </div>
 
-          <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-neutral-500 lg:mx-0">
+          <p className="mt-6 w-full text-sm leading-relaxed text-neutral-500">
             Não encontrou pronto? Melhor ainda.
             <Link
               href={`/produto/${featured.id}`}
