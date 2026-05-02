@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import type { Product } from "@/lib/data";
 import { formatBRL } from "@/lib/data";
 import { StickyBuyBar } from "@/components/StickyBuyBar";
+import { ProductActionButtons } from "@/components/ProductActionButtons";
 import { StockIndicator } from "@/components/StockIndicator";
 
 function storageKey(productId: string) {
@@ -114,20 +114,8 @@ export function ProductDetailClient({ product }: Props) {
               <StockIndicator count={stock} />
             </div>
 
-            <div className="mt-8 hidden flex-col gap-3 sm:flex-row md:flex">
-              <button
-                type="button"
-                onClick={handlePurchase}
-                className="inline-flex h-12 flex-1 items-center justify-center rounded-full bg-neutral-900 text-sm font-semibold text-white transition hover:bg-neutral-800 active:scale-[0.98]"
-              >
-                Comprar agora
-              </button>
-              <Link
-                href="/orcamento"
-                className="inline-flex h-12 flex-1 items-center justify-center rounded-full border border-neutral-300 bg-white text-sm font-semibold text-neutral-900 transition hover:border-neutral-400 hover:bg-neutral-50 active:scale-[0.98]"
-              >
-                Criar algo parecido
-              </Link>
+            <div className="mt-8 hidden md:flex">
+              <ProductActionButtons onPurchase={handlePurchase} productName={product.name} />
             </div>
           </div>
         </div>
@@ -136,6 +124,7 @@ export function ProductDetailClient({ product }: Props) {
       <StickyBuyBar
         price={product.price}
         priceAnchor={product.priceAnchor}
+        productName={product.name}
         onPurchase={handlePurchase}
       />
     </>
