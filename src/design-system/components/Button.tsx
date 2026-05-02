@@ -17,9 +17,12 @@ export function Button({
   return (
     <button
       className={cn(
-        "px-6 py-3 rounded-lg font-medium transition-all",
-        variant === "primary" && "bg-black text-white hover:opacity-90",
-        variant === "secondary" && "bg-gray-100 text-black hover:bg-gray-200",
+        "px-6 py-3 rounded-[var(--radius-lg)] font-medium transition-all duration-200 hover:-translate-y-0.5",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50",
+        variant === "primary" &&
+          "bg-brand-primary text-background hover:opacity-90 active:opacity-80",
+        variant === "secondary" &&
+          "bg-surface text-text-primary border border-border hover:bg-background",
         className,
       )}
       {...props}
