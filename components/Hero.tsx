@@ -9,16 +9,15 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden bg-neutral-50">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-12 lg:py-20">
-        <div className="order-2 flex flex-col justify-center lg:order-1">
+        <div className="order-2 flex flex-col justify-center text-center lg:order-1 lg:text-left">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-neutral-500">
             Impressão 3D sob medida
           </p>
-          <h1 className="text-balance text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl lg:text-5xl">
+          <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl lg:text-5xl">
             Você imagina. A gente cria.
           </h1>
-          <p className="mt-4 max-w-md text-pretty text-lg leading-relaxed text-neutral-600 sm:text-xl">
-            Transforme qualquer ideia em um objeto real — sem precisar saber
-            modelar ou desenhar.
+          <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-neutral-600 sm:text-xl lg:mx-0">
+            Transforme qualquer ideia em um objeto real — sem precisar saber modelar ou desenhar.
           </p>
 
           <div className="mt-6">
@@ -27,7 +26,7 @@ export function Hero() {
             </p>
           </div>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center lg:justify-start">
             <Link
               href="/orcamento"
               className="inline-flex h-12 items-center justify-center rounded-full bg-neutral-900 px-8 text-sm font-semibold text-white transition hover:bg-neutral-800 active:scale-[0.98]"
@@ -42,13 +41,11 @@ export function Hero() {
             </Link>
           </div>
 
-          <p className="mt-6 max-w-md text-sm leading-relaxed text-neutral-500">
+          <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-neutral-500 lg:mx-0">
             Não encontrou pronto? Melhor ainda.
-          </p>
-          <p className="mt-2 max-w-md text-sm leading-relaxed text-neutral-500">
             <Link
               href={`/produto/${featured.id}`}
-              className="underline decoration-neutral-300 underline-offset-4 hover:text-neutral-700"
+              className="ml-1 underline decoration-neutral-300 underline-offset-4 hover:text-neutral-700"
             >
               Comprar algo pronto
             </Link>
