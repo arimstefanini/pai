@@ -18,16 +18,19 @@ export default async function OrcamentoPage({ searchParams }: Props) {
     : "";
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-16">
-      <h1 className="text-2xl font-semibold tracking-tight text-neutral-900 sm:text-3xl">
-        Orçamento personalizado
-      </h1>
-      <p className="mt-3 text-pretty text-neutral-600">
-        Não precisa encontrar pronto. Se você consegue imaginar, dá pra criar.
-      </p>
-      <div className="mt-10">
-        <CustomOrderForm initialSuggestion={suggestion} />
+    <section className="py-6 sm:py-10">
+      <div className="mx-auto w-full max-w-5xl px-3 sm:px-6">
+        <h1 className="text-2xl font-semibold tracking-tight text-neutral-900 sm:text-3xl">
+          Orçamento personalizado
+        </h1>
+        <p className="mt-2 text-neutral-600">
+          Não precisa encontrar pronto. Se você consegue imaginar, dá pra criar.
+        </p>
+
+        <div className="mt-6 w-full">
+          <CustomOrderForm initialSuggestion={suggestion} />
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
