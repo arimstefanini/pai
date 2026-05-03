@@ -4,7 +4,7 @@ export function Storytelling() {
   return (
     <section className="border-t border-neutral-100 bg-white py-16 sm:py-20">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-12">
-        <div className="order-1 mx-auto w-full max-w-sm lg:max-w-md">
+        <div className="order-1 w-full">
           <Animated3DMedia
             webmSrc="/video/storytelling-3d-alpha.webm"
             mp4Src="/video/videoBlender.mp4"
