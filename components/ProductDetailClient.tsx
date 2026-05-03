@@ -21,6 +21,7 @@ type Props = {
 const PAGE_SIZE = 6;
 
 function readStock(productId: string, initialStock: number) {
+  if (typeof window === "undefined") return initialStock;
   const raw = sessionStorage.getItem(storageKey(productId));
   if (raw == null) return initialStock;
   const parsed = parseInt(raw, 10);
@@ -58,7 +59,9 @@ export function ProductDetailClient({ product, allProducts }: Props) {
 
   const persist = useCallback(
     (n: number) => {
-      sessionStorage.setItem(key, String(n));
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem(key, String(n));
+      }
     },
     [key],
   );
