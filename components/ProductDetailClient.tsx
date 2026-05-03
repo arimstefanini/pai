@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { Product } from "@/lib/data";
+import { categories, type CategorySlug, type Product } from "@/lib/data";
 import { formatBRL } from "@/lib/data";
 import { ProductActionButtons } from "@/components/ProductActionButtons";
 import { StockIndicator } from "@/components/StockIndicator";
@@ -11,19 +11,32 @@ import { StockIndicator } from "@/components/StockIndicator";
 type Props = {
   product: Product;
   allProducts: Product[];
+  initialCategory?: CategorySlug | null;
 };
 
 const PAGE_SIZE = 5;
 
-export function ProductDetailClient({ product, allProducts }: Props) {
+export function ProductDetailClient({ product, allProducts, initialCategory = null }: Props) {
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+  const [selectedCategory, setSelectedCategory] = useState<CategorySlug | null>(
+    initialCategory,
+  );
+
+  const filteredProducts = useMemo(
+    () =>
+      selectedCategory
+        ? allProducts.filter((item) => item.categorySlug === selectedCategory)
+        : allProducts,
+    [allProducts, selectedCategory],
+  );
 
   const orderedProducts = useMemo(() => {
-    const startIndex = Math.max(0, allProducts.findIndex((item) => item.id === product.id));
-    const base = [...allProducts.slice(startIndex), ...allProducts.slice(0, startIndex)];
+    const source = filteredProducts.length > 0 ? filteredProducts : allProducts;
+    const startIndex = Math.max(0, source.findIndex((item) => item.id === product.id));
+    const base = [...source.slice(startIndex), ...source.slice(0, startIndex)];
     return [...base, ...base, ...base, ...base]; // mock para teste de scroll infinito
-  }, [allProducts, product.id]);
+  }, [allProducts, filteredProducts, product.id]);
 
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
@@ -62,6 +75,41 @@ export function ProductDetailClient({ product, allProducts }: Props) {
         <p className="mt-2 text-sm text-neutral-600">
           Scroll infinito para baixo: uma imagem + texto ao lado, como você pediu.
         </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedCategory(null);
+              setVisibleCount(PAGE_SIZE);
+            }}
+            className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
+              selectedCategory === null
+                ? "bg-neutral-900 text-white"
+                : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
+            }`}
+          >
+            TODOS
+          </button>
+          {categories
+            .filter((category) => category.slug !== "variados")
+            .map((category) => (
+              <button
+                key={category.slug}
+                type="button"
+                onClick={() => {
+                  setSelectedCategory(category.slug);
+                  setVisibleCount(PAGE_SIZE);
+                }}
+                className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
+                  selectedCategory === category.slug
+                    ? "bg-neutral-900 text-white"
+                    : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
+                }`}
+              >
+                {category.name.toUpperCase()}
+              </button>
+            ))}
+        </div>
       </div>
 
       <div className="space-y-6">

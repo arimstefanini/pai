@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const categoryMenu = [
-  { href: "/categoria/casa", label: "CASA" },
-  { href: "/categoria/brinquedos", label: "BRINQUEDOS" },
-  { href: "/categoria/mecanicos", label: "PROJETOS MECÂNICOS" },
-  { href: "/categoria/maquetes", label: "MAQUETES" },
+  { href: "/produto/vaso-orbita?categoria=casa", label: "CASA" },
+  { href: "/produto/vaso-orbita?categoria=brinquedos", label: "BRINQUEDOS" },
+  { href: "/produto/vaso-orbita?categoria=mecanicos", label: "PROJETOS MECÂNICOS" },
+  { href: "/produto/vaso-orbita?categoria=maquetes", label: "MAQUETES" },
 ];
 
 const nav = [
