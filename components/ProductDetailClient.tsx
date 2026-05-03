@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { categories, type CategorySlug, type Product } from "@/lib/data";
 import { formatBRL } from "@/lib/data";
@@ -21,6 +21,7 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState<CategorySlug | null>(
     initialCategory,
   );
@@ -49,6 +50,22 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
 
   const hasMore = visibleCount < orderedProducts.length;
 
+
+  const allCategoriesHref = useMemo(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("categoria");
+    const query = params.toString();
+    return query ? `${pathname}?${query}` : pathname;
+  }, [pathname, searchParams]);
+
+  const getCategoryHref = useCallback(
+    (category: CategorySlug) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("categoria", category);
+      return `${pathname}?${params.toString()}`;
+    },
+    [pathname, searchParams],
+  );
   const applyCategoryFilter = useCallback(
     (category: CategorySlug | null) => {
       setSelectedCategory(category);
@@ -87,7 +104,7 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link
-            href={pathname}
+            href={allCategoriesHref}
             onClick={() => applyCategoryFilter(null)}
             className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
               selectedCategory === null
@@ -102,7 +119,7 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
             .map((category) => (
               <Link
                 key={category.slug}
-                href={`${pathname}?categoria=${category.slug}`}
+                href={getCategoryHref(category.slug)}
                 onClick={() => applyCategoryFilter(category.slug)}
                 className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
                   selectedCategory === category.slug

@@ -18,11 +18,11 @@ export default async function OrcamentoPage({ searchParams }: Props) {
     : "";
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-16">
+    <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-16">
       <h1 className="text-2xl font-semibold tracking-tight text-neutral-900 sm:text-3xl">
         Orçamento personalizado
       </h1>
-      <p className="mt-3 text-pretty text-neutral-600">
+      <p className="mt-3 max-w-2xl text-pretty text-neutral-600">
         Não precisa encontrar pronto. Se você consegue imaginar, dá pra criar.
       </p>
       <div className="mt-10">
