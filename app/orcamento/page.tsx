@@ -18,9 +18,9 @@ export default async function OrcamentoPage({ searchParams }: Props) {
     : "";
 
   return (
-    <section className="py-12 sm:py-16">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <div className="lg:sticky lg:top-24">
+    <section className="py-8 sm:py-12">
+      <div className="mx-auto grid max-w-6xl gap-6 px-3 sm:gap-8 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10 lg:items-start">
+        <div className="">
           <h1 className="text-2xl font-semibold tracking-tight text-neutral-900 sm:text-3xl">
             Orçamento personalizado
           </h1>
