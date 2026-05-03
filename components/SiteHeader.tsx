@@ -1,14 +1,14 @@
 import Link from "next/link";
 
 const categoryMenu = [
-  { href: "/produto/vaso-orbita?categoria=casa", label: "CASA" },
-  { href: "/produto/vaso-orbita?categoria=brinquedos", label: "BRINQUEDOS" },
-  { href: "/produto/vaso-orbita?categoria=mecanicos", label: "PROJETOS MECÂNICOS" },
-  { href: "/produto/vaso-orbita?categoria=maquetes", label: "MAQUETES" },
+  { href: "/galeria?categoria=casa", label: "CASA" },
+  { href: "/galeria?categoria=brinquedos", label: "BRINQUEDOS" },
+  { href: "/galeria?categoria=mecanicos", label: "PROJETOS MECÂNICOS" },
+  { href: "/galeria?categoria=maquetes", label: "MAQUETES" },
 ];
 
 const nav = [
-  { href: "/produto/vaso-orbita", label: "Galeria" },
+  { href: "/galeria", label: "Galeria" },
   { href: "/orcamento", label: "Orçamento" },
 ];
 
@@ -24,12 +24,13 @@ export function SiteHeader() {
         </Link>
         <nav className="flex items-center gap-1 sm:gap-4" aria-label="Principal">
           <div className="group relative">
-            <Link
-              href="/#categorias"
+            <button
+              type="button"
               className="rounded-md px-3 py-2 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-900 sm:px-4"
+              aria-haspopup="menu"
             >
               Categorias
-            </Link>
+            </button>
 
             <div className="pointer-events-none absolute right-0 top-full z-50 w-72 pt-2 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
               <div className="rounded-xl border border-neutral-200 bg-white p-2 shadow-xl">
