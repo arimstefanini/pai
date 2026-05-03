@@ -18,7 +18,7 @@ type Props = {
   allProducts: Product[];
 };
 
-const PAGE_SIZE = 4;
+const PAGE_SIZE = 6;
 
 function readStock(productId: string, initialStock: number) {
   const raw = sessionStorage.getItem(storageKey(productId));
@@ -39,7 +39,8 @@ export function ProductDetailClient({ product, allProducts }: Props) {
 
   const orderedProducts = useMemo(() => {
     const startIndex = Math.max(0, allProducts.findIndex((item) => item.id === product.id));
-    return [...allProducts.slice(startIndex), ...allProducts.slice(0, startIndex)];
+    const base = [...allProducts.slice(startIndex), ...allProducts.slice(0, startIndex)];
+    return [...base, ...base, ...base]; // mock de feed longo para testar scroll/paginação
   }, [allProducts, product.id]);
 
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
@@ -90,7 +91,7 @@ export function ProductDetailClient({ product, allProducts }: Props) {
             <div
               ref={scrollerRef}
               onScroll={handleScroll}
-              className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2"
+              className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2" aria-label="Carrossel de produtos"
             >
               {visibleProducts.map((item) => (
                 <button
@@ -100,7 +101,7 @@ export function ProductDetailClient({ product, allProducts }: Props) {
                     setActiveId(item.id);
                     setStock(readStock(item.id, item.initialStock));
                   }}
-                  className="group relative aspect-[4/3] min-w-[82%] snap-start overflow-hidden rounded-2xl bg-neutral-100 ring-1 ring-neutral-200/80 sm:min-w-[60%] lg:min-w-[70%]"
+                  className="group relative aspect-[4/3] min-w-[78%] snap-start overflow-hidden rounded-2xl bg-neutral-100 ring-1 ring-neutral-200/80 sm:min-w-[46%] lg:min-w-[38%]"
                 >
                   <Image
                     src={item.images.lifestyle}
@@ -121,9 +122,10 @@ export function ProductDetailClient({ product, allProducts }: Props) {
               ))}
             </div>
 
-            <div className="flex items-center justify-between text-xs text-neutral-500">
+            <div className="flex items-center justify-between gap-3 text-xs text-neutral-500">
+              <span className="hidden sm:inline">Arraste para o lado para ver mais produtos.</span>
               <span>
-                {Math.min(visibleCount, orderedProducts.length)} de {orderedProducts.length} itens
+                {Math.min(visibleCount, orderedProducts.length)} de {orderedProducts.length} itens (feed de teste)
               </span>
               {hasMore && (
                 <button
