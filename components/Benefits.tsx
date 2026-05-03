@@ -59,10 +59,10 @@ export function Benefits() {
   return (
     <section className="border-t border-neutral-100 bg-white py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <h2 className="text-balance text-2xl font-semibold tracking-tight text-neutral-900 sm:text-3xl">
+        <h2 className="text-2xl font-semibold tracking-tight text-neutral-900 sm:text-3xl">
           Benefícios racionais
         </h2>
-        <p className="mt-3 max-w-2xl text-pretty text-neutral-600">
+        <p className="mt-3 max-w-3xl text-base leading-relaxed text-neutral-600">
           Argumentos objetivos para decidir com confiança e sem fricção.
         </p>
 

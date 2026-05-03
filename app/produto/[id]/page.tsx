@@ -24,5 +24,5 @@ export default async function ProductPage({ params }: Props) {
   const product = getProductById(id);
   if (!product) notFound();
 
-  return <ProductDetailClient product={product} />;
+  return <ProductDetailClient product={product} allProducts={products} />;
 }

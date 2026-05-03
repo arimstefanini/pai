@@ -1,143 +1,112 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Product } from "@/lib/data";
 import { formatBRL } from "@/lib/data";
-import { StickyBuyBar } from "@/components/StickyBuyBar";
+import { ProductActionButtons } from "@/components/ProductActionButtons";
 import { StockIndicator } from "@/components/StockIndicator";
 
-function storageKey(productId: string) {
-  return `stock-${productId}`;
-}
+type Props = {
+  product: Product;
+  allProducts: Product[];
+};
 
-type Props = { product: Product };
+const PAGE_SIZE = 5;
 
-export function ProductDetailClient({ product }: Props) {
+export function ProductDetailClient({ product, allProducts }: Props) {
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
-  const key = useMemo(() => storageKey(product.id), [product.id]);
 
-  const [stock, setStock] = useState(() => {
-    if (typeof window === "undefined") return product.initialStock;
-    const raw = sessionStorage.getItem(key);
-    if (raw == null) return product.initialStock;
-    const n = parseInt(raw, 10);
-    return !Number.isNaN(n) && n >= 0 ? n : product.initialStock;
-  });
+  const orderedProducts = useMemo(() => {
+    const startIndex = Math.max(0, allProducts.findIndex((item) => item.id === product.id));
+    const base = [...allProducts.slice(startIndex), ...allProducts.slice(0, startIndex)];
+    return [...base, ...base, ...base, ...base]; // mock para teste de scroll infinito
+  }, [allProducts, product.id]);
 
-  const persist = useCallback(
-    (n: number) => {
-      if (typeof window !== "undefined") sessionStorage.setItem(key, String(n));
-    },
-    [key],
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+
+  const visibleProducts = useMemo(
+    () => orderedProducts.slice(0, visibleCount),
+    [orderedProducts, visibleCount],
   );
 
-  const handlePurchase = useCallback(() => {
-    setStock((prev) => {
-      const next = Math.max(0, prev - 1);
-      persist(next);
-      return next;
-    });
-    router.push(`/checkout?productId=${product.id}`);
-  }, [persist, product.id, router]);
+  const hasMore = visibleCount < orderedProducts.length;
 
-  const gallery = [
-    { src: product.images.studio, label: "Estúdio", alt: `${product.name} — estúdio` },
-    {
-      src: product.images.lifestyle,
-      label: "Ambiente",
-      alt: `${product.name} — ambiente`,
-    },
-    {
-      src: product.images.texture,
-      label: "Textura",
-      alt: `${product.name} — textura`,
-    },
-  ] as const;
+  const loadMore = useCallback(() => {
+    setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, orderedProducts.length));
+  }, [orderedProducts.length]);
+
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel || !hasMore) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          loadMore();
+        }
+      },
+      { rootMargin: "300px" },
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [hasMore, loadMore]);
 
   return (
-    <>
-      <div className="mx-auto max-w-6xl px-4 pb-28 pt-8 sm:px-6 md:pb-12">
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
-          <div className="space-y-4">
-            {gallery.map((g) => (
-              <figure
-                key={g.label}
-                className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-100 ring-1 ring-neutral-200/80"
-              >
-                <Image
-                  src={g.src}
-                  alt={g.alt}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover transition duration-500 group-hover:scale-105"
-                />
-                <figcaption className="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-neutral-600 backdrop-blur-sm">
-                  {g.label}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-
-          <div className="lg:sticky lg:top-24 lg:self-start">
-            <div className="flex flex-wrap gap-2">
-              {product.limitedEdition && (
-                <span className="rounded-full bg-neutral-900 px-2.5 py-1 text-xs font-semibold text-white">
-                  Edição limitada
-                </span>
-              )}
-              {product.uniquePiece && (
-                <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-900 ring-1 ring-amber-200/80">
-                  Peça única
-                </span>
-              )}
-            </div>
-            <h1 className="mt-4 text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
-              {product.name}
-            </h1>
-            <p className="mt-4 text-pretty leading-relaxed text-neutral-600">
-              {product.description}
-            </p>
-
-            <div className="mt-8 flex flex-wrap items-baseline gap-3">
-              <span className="text-sm text-neutral-400 line-through">
-                De {formatBRL(product.priceAnchor)}
-              </span>
-              <span className="text-2xl font-semibold text-neutral-900">
-                Por {formatBRL(product.price)}
-              </span>
-            </div>
-
-            <div className="mt-4">
-              <StockIndicator count={stock} />
-            </div>
-
-            <div className="mt-8 hidden flex-col gap-3 sm:flex-row md:flex">
-              <button
-                type="button"
-                onClick={handlePurchase}
-                className="inline-flex h-12 flex-1 items-center justify-center rounded-full bg-neutral-900 text-sm font-semibold text-white transition hover:bg-neutral-800 active:scale-[0.98]"
-              >
-                Comprar agora
-              </button>
-              <Link
-                href="/orcamento"
-                className="inline-flex h-12 flex-1 items-center justify-center rounded-full border border-neutral-300 bg-white text-sm font-semibold text-neutral-900 transition hover:border-neutral-400 hover:bg-neutral-50 active:scale-[0.98]"
-              >
-                Criar algo parecido
-              </Link>
-            </div>
-          </div>
-        </div>
+    <div className="mx-auto max-w-6xl px-4 pb-24 pt-8 sm:px-6">
+      <div className="mb-6">
+        <h1 className="text-2xl font-semibold text-neutral-900 sm:text-3xl">Inspirações de produto</h1>
+        <p className="mt-2 text-sm text-neutral-600">
+          Scroll infinito para baixo: uma imagem + texto ao lado, como você pediu.
+        </p>
       </div>
 
-      <StickyBuyBar
-        price={product.price}
-        priceAnchor={product.priceAnchor}
-        onPurchase={handlePurchase}
-      />
-    </>
+      <div className="space-y-6">
+        {visibleProducts.map((item, index) => (
+          <article
+            key={`${item.id}-${index}`}
+            className="grid gap-4 rounded-2xl border border-neutral-200 bg-white p-4 sm:grid-cols-[1fr_1fr] sm:items-center"
+          >
+            <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-neutral-100">
+              <Image
+                src={item.images.lifestyle}
+                alt={`${item.name} — ambiente`}
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-semibold tracking-tight text-neutral-900">{item.name}</h2>
+              <p className="mt-3 leading-relaxed text-neutral-600">{item.description}</p>
+
+              <div className="mt-4 flex flex-wrap items-baseline gap-3">
+                <span className="text-sm text-neutral-400 line-through">De {formatBRL(item.priceAnchor)}</span>
+                <span className="text-2xl font-semibold text-neutral-900">Por {formatBRL(item.price)}</span>
+              </div>
+
+              <div className="mt-3">
+                <StockIndicator count={item.initialStock} />
+              </div>
+
+              <div className="mt-5">
+                <ProductActionButtons
+                  onPurchase={() => router.push(`/checkout?productId=${item.id}`)}
+                  productName={item.name}
+                />
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div ref={sentinelRef} className="py-8 text-center text-sm text-neutral-500">
+        {hasMore ? "Carregando mais produtos..." : "Fim da lista de teste."}
+      </div>
+    </div>
   );
 }
