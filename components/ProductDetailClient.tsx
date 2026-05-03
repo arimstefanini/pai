@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { categories, type CategorySlug, type Product } from "@/lib/data";
 import { formatBRL } from "@/lib/data";
@@ -19,6 +20,7 @@ const PAGE_SIZE = 5;
 export function ProductDetailClient({ product, allProducts, initialCategory = null }: Props) {
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+  const pathname = usePathname();
   const [selectedCategory, setSelectedCategory] = useState<CategorySlug | null>(
     initialCategory,
   );
@@ -46,6 +48,14 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
   );
 
   const hasMore = visibleCount < orderedProducts.length;
+
+  const applyCategoryFilter = useCallback(
+    (category: CategorySlug | null) => {
+      setSelectedCategory(category);
+      setVisibleCount(PAGE_SIZE);
+    },
+    [],
+  );
 
   const loadMore = useCallback(() => {
     setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, orderedProducts.length));
@@ -76,12 +86,9 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
           Scroll infinito para baixo: uma imagem + texto ao lado, como você pediu.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={() => {
-              setSelectedCategory(null);
-              setVisibleCount(PAGE_SIZE);
-            }}
+          <Link
+            href={pathname}
+            onClick={() => applyCategoryFilter(null)}
             className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
               selectedCategory === null
                 ? "bg-neutral-900 text-white"
@@ -89,17 +96,14 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
             }`}
           >
             TODOS
-          </button>
+          </Link>
           {categories
             .filter((category) => category.slug !== "variados")
             .map((category) => (
-              <button
+              <Link
                 key={category.slug}
-                type="button"
-                onClick={() => {
-                  setSelectedCategory(category.slug);
-                  setVisibleCount(PAGE_SIZE);
-                }}
+                href={`${pathname}?categoria=${category.slug}`}
+                onClick={() => applyCategoryFilter(category.slug)}
                 className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
                   selectedCategory === category.slug
                     ? "bg-neutral-900 text-white"
@@ -107,7 +111,7 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
                 }`}
               >
                 {category.name.toUpperCase()}
-              </button>
+              </Link>
             ))}
         </div>
       </div>
