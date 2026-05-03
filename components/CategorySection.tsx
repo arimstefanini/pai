@@ -19,7 +19,7 @@ export function CategorySection({ category, products }: Props) {
             <p className="mt-2 text-sm text-neutral-600">{category.description}</p>
           </div>
           <Link
-            href={`/categoria/${category.slug}`}
+            href={`/galeria?categoria=${category.slug}`}
             className="text-sm font-semibold text-neutral-800 underline decoration-neutral-300 underline-offset-4 hover:text-neutral-950"
           >
             Ver tudo
