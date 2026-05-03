@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { categories, type CategorySlug, type Product } from "@/lib/data";
@@ -52,14 +53,8 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
     (category: CategorySlug | null) => {
       setSelectedCategory(category);
       setVisibleCount(PAGE_SIZE);
-
-      if (category) {
-        router.replace(`${pathname}?categoria=${category}`, { scroll: false });
-      } else {
-        router.replace(pathname, { scroll: false });
-      }
     },
-    [pathname, router],
+    [],
   );
 
   const loadMore = useCallback(() => {
@@ -91,8 +86,8 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
           Scroll infinito para baixo: uma imagem + texto ao lado, como você pediu.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <button
-            type="button"
+          <Link
+            href={pathname}
             onClick={() => applyCategoryFilter(null)}
             className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
               selectedCategory === null
@@ -101,13 +96,13 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
             }`}
           >
             TODOS
-          </button>
+          </Link>
           {categories
             .filter((category) => category.slug !== "variados")
             .map((category) => (
-              <button
+              <Link
                 key={category.slug}
-                type="button"
+                href={`${pathname}?categoria=${category.slug}`}
                 onClick={() => applyCategoryFilter(category.slug)}
                 className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
                   selectedCategory === category.slug
@@ -116,7 +111,7 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
                 }`}
               >
                 {category.name.toUpperCase()}
-              </button>
+              </Link>
             ))}
         </div>
       </div>
