@@ -2,7 +2,7 @@ import { Animated3DMedia } from "@/components/Animated3DMedia";
 
 export function Storytelling() {
   return (
-    <section className="border-t border-neutral-100 bg-white py-16 sm:py-20">
+    <section className="border-t border-neutral-100 py-16 sm:py-20">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-12">
         <div className="order-1 w-full lg:w-[50%] justify-self-center">
           <Animated3DMedia
