@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ProductDetailClient } from "@/components/ProductDetailClient";
 import { getProductById, products } from "@/lib/data";
 
@@ -21,6 +21,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({ params }: Props) {
   const { id } = await params;
+
+  if (id === "vaso-orbita") {
+    redirect("/#galeria");
+  }
+
   const product = getProductById(id);
   if (!product) notFound();
 
