@@ -72,7 +72,7 @@ export function CustomOrderForm({ initialSuggestion = "" }: Props) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mx-auto max-w-xl space-y-6 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm sm:p-8"
+      className="mx-auto w-full max-w-2xl space-y-7 rounded-2xl border border-neutral-200 bg-white/95 p-6 shadow-sm sm:p-8"
     >
       <div>
         <label

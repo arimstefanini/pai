@@ -7,7 +7,7 @@ export function Hero() {
   const heroImage = featured.images.lifestyle;
 
   return (
-    <section className="relative overflow-hidden bg-neutral-50">
+    <section className="relative overflow-hidden bg-transparent">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:gap-12 lg:py-20">
         <div className="order-2 flex flex-col justify-center text-center lg:order-1 lg:text-left">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-neutral-500">
