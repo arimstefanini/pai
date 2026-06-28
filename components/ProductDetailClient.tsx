@@ -1,23 +1,27 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { categories, type CategorySlug, type Product } from "@/lib/data";
-import { formatBRL } from "@/lib/data";
+import { MediaRenderer } from "@/components/MediaRenderer";
 import { ProductActionButtons } from "@/components/ProductActionButtons";
 import { StockIndicator } from "@/components/StockIndicator";
+import type { Product, ProductMetadata } from "@/lib/products";
+import { formatPrice, getCategoryName, extractCategories } from "@/lib/products";
 
-type Props = {
+interface ProductDetailClientProps {
   product: Product;
   allProducts: Product[];
-  initialCategory?: CategorySlug | null;
-};
+  initialCategory?: ProductMetadata["category"] | null;
+}
 
 const PAGE_SIZE = 5;
 
-export function ProductDetailClient({ product, allProducts, initialCategory = null }: Props) {
+export function ProductDetailClient({
+  product,
+  allProducts,
+  initialCategory = null,
+}: ProductDetailClientProps) {
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
   const pathname = usePathname();
@@ -29,17 +33,20 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
   const filteredProducts = useMemo(
     () =>
       selectedCategory
-        ? allProducts.filter((item) => item.categorySlug === selectedCategory)
+        ? allProducts.filter((item) => item.metadata.category === selectedCategory)
         : allProducts,
     [allProducts, selectedCategory],
   );
 
   const orderedProducts = useMemo(() => {
     const source = filteredProducts.length > 0 ? filteredProducts : allProducts;
-    const startIndex = Math.max(0, source.findIndex((item) => item.id === product.id));
+    const startIndex = Math.max(
+      0,
+      source.findIndex((item) => item.metadata.id === product.metadata.id),
+    );
     const base = [...source.slice(startIndex), ...source.slice(0, startIndex)];
-    return [...base, ...base, ...base, ...base]; // mock para teste de scroll infinito
-  }, [allProducts, filteredProducts, product.id]);
+    return [...base, ...base, ...base, ...base]; // Loop for infinite scroll
+  }, [allProducts, filteredProducts, product.metadata.id]);
 
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
@@ -67,7 +74,7 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
     [pathname, searchParams],
   );
   const applyCategoryFilter = useCallback(
-    (category: CategorySlug | null) => {
+    (category: ProductMetadata["category"] | null) => {
       setSelectedCategory(category);
       setVisibleCount(PAGE_SIZE);
     },
@@ -97,11 +104,16 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-24 pt-8 sm:px-6">
+      {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-semibold text-neutral-900 sm:text-3xl">Inspirações de produto</h1>
+        <h1 className="text-2xl font-semibold text-neutral-900 sm:text-3xl">
+          Inspirações de produto
+        </h1>
         <p className="mt-2 text-sm text-neutral-600">
-          Scroll infinito para baixo: uma imagem + texto ao lado, como você pediu.
+          Explore nossa galeria de produtos personalizados.
         </p>
+
+        {/* Category Filters */}
         <div className="mt-4 flex flex-wrap gap-2">
           <Link
             href={allCategoriesHref}
@@ -133,39 +145,46 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
         </div>
       </div>
 
+      {/* Products Grid */}
       <div className="space-y-6">
         {visibleProducts.map((item, index) => (
           <article
-            key={`${item.id}-${index}`}
+            key={`${item.metadata.id}-${index}`}
             className="grid gap-4 rounded-2xl border border-neutral-200 bg-white p-4 sm:grid-cols-[1fr_1fr] sm:items-center"
           >
+            {/* Media */}
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-neutral-100">
-              <Image
-                src={item.images.lifestyle}
-                alt={`${item.name} — ambiente`}
-                fill
-                sizes="(max-width: 640px) 100vw, 50vw"
-                className="object-cover"
+              <MediaRenderer
+                media={item.media}
+                alt={item.metadata.title}
               />
             </div>
 
+            {/* Content */}
             <div>
-              <h2 className="text-2xl font-semibold tracking-tight text-neutral-900">{item.name}</h2>
-              <p className="mt-3 leading-relaxed text-neutral-600">{item.description}</p>
+              <h2 className="text-2xl font-semibold tracking-tight text-neutral-900">
+                {item.metadata.title}
+              </h2>
+              <p className="mt-3 leading-relaxed text-neutral-600">
+                {item.metadata.description}
+              </p>
 
               <div className="mt-4 flex flex-wrap items-baseline gap-3">
-                <span className="text-sm text-neutral-400 line-through">De {formatBRL(item.priceAnchor)}</span>
-                <span className="text-2xl font-semibold text-neutral-900">Por {formatBRL(item.price)}</span>
+                <span className="text-2xl font-semibold text-neutral-900">
+                  {formatPrice(item.metadata.price)}
+                </span>
               </div>
 
               <div className="mt-3">
-                <StockIndicator count={item.initialStock} />
+                <StockIndicator product={item} />
               </div>
 
               <div className="mt-5">
                 <ProductActionButtons
-                  onPurchase={() => router.push(`/checkout?productId=${item.id}`)}
-                  productName={item.name}
+                  onPurchase={() =>
+                    router.push(`/checkout?productId=${item.metadata.id}`)
+                  }
+                  productName={item.metadata.title}
                 />
               </div>
             </div>
@@ -173,8 +192,12 @@ export function ProductDetailClient({ product, allProducts, initialCategory = nu
         ))}
       </div>
 
-      <div ref={sentinelRef} className="py-8 text-center text-sm text-neutral-500">
-        {hasMore ? "Carregando mais produtos..." : "Fim da lista de teste."}
+      {/* Load More Sentinel */}
+      <div
+        ref={sentinelRef}
+        className="py-8 text-center text-sm text-neutral-500"
+      >
+        {hasMore ? "Carregando mais produtos..." : "Fim da galeria."}
       </div>
     </div>
   );

@@ -1,13 +1,20 @@
-import Image from "next/image";
+/**
+ * Hero section
+ * Displays featured product or static content
+ */
+
 import Link from "next/link";
-import { getHeroFeaturedProduct } from "@/lib/data";
+import { MediaRenderer } from "@/components/MediaRenderer";
+import type { Product } from "@/lib/products";
+import { getProductUrl } from "@/lib/products";
 
-export function Hero() {
-  const featured = getHeroFeaturedProduct();
-  const heroImage = featured.images.lifestyle;
+interface HeroProps {
+  product?: Product;
+}
 
+export function Hero({ product }: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-neutral-50">
+    <section className="relative overflow-hidden bg-transparent">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:gap-12 lg:py-20">
         <div className="order-2 flex flex-col justify-center text-center lg:order-1 lg:text-left">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-neutral-500">
@@ -17,7 +24,8 @@ export function Hero() {
             Você imagina. A gente cria.
           </h1>
           <p className="mt-4 w-full text-lg leading-relaxed text-neutral-600 sm:text-xl">
-            Transforme qualquer ideia em um objeto real — sem precisar saber modelar ou desenhar.
+            Transforme qualquer ideia em um objeto real — sem precisar saber
+            modelar ou desenhar.
           </p>
 
           <div className="mt-6">
@@ -41,29 +49,30 @@ export function Hero() {
             </Link>
           </div>
 
-          <p className="mt-6 w-full text-sm leading-relaxed text-neutral-500">
-            Não encontrou pronto? Melhor ainda.
-            <Link
-              href={`/produto/${featured.id}`}
-              className="ml-1 underline decoration-neutral-300 underline-offset-4 hover:text-neutral-700"
-            >
-              Comprar algo pronto
-            </Link>
-          </p>
+          {product && (
+            <p className="mt-6 w-full text-sm leading-relaxed text-neutral-500">
+              Não encontrou pronto? Melhor ainda.
+              <Link
+                href={getProductUrl(product)}
+                className="ml-1 underline decoration-neutral-300 underline-offset-4 hover:text-neutral-700"
+              >
+                Comprar algo pronto
+              </Link>
+            </p>
+          )}
         </div>
 
-        <div className="order-1 lg:order-2">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-neutral-200/60 sm:aspect-[3/4]">
-            <Image
-              src={heroImage}
-              alt={featured.name}
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-center"
-            />
+        {product && (
+          <div className="order-1 lg:order-2">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-neutral-200/60 sm:aspect-[3/4]">
+              <MediaRenderer
+                media={product.media}
+                alt={product.metadata.title}
+                priority
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

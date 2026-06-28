@@ -1,0 +1,15 @@
+{
+  "id": "porta-faca",
+  "title": "Bloco de Facas",
+  "slug": "porta-faca",
+  "category": "casa",
+  "featured": false,
+  "type": "video",
+  "description": "Suporte organizador para facas de cozinha.",
+  "tags": ["Cozinha", "Organização", "Utensílio"],
+  "story": "Cozinhe com segurança e estilo.",
+  "cta": "Quero um",
+  "price": 79,
+  "limited": false,
+  "stock": 9
+}
