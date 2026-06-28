@@ -14,7 +14,7 @@ import { videoPlaybackManager } from "./videoManager";
 
 interface RegisteredMobileVideo {
   videoId: string;
-  containerRef: React.RefObject<HTMLDivElement>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
   isInViewport: boolean;
 }
 
@@ -57,7 +57,7 @@ class MobilePlaybackController {
   /**
    * Register a video for mobile control
    */
-  registerForMobile(videoId: string, containerRef: React.RefObject<HTMLDivElement>): void {
+  registerForMobile(videoId: string, containerRef: React.RefObject<HTMLDivElement | null>): void {
     this.initialize();
 
     this.registeredVideos.set(videoId, {

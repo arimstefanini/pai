@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { MediaRenderer } from "@/components/MediaRenderer";
+import { ProductMedia } from "@/components/ProductMedia";
+import { ProductPlaybackController } from "@/components/playback/ProductPlaybackController";
 import { ProductActionButtons } from "@/components/ProductActionButtons";
 import { StockIndicator } from "@/components/StockIndicator";
-import type { Product, ProductMetadata } from "@/lib/products";
-import { formatPrice, getCategoryName, extractCategories } from "@/lib/products";
+import type { Product, ProductCategory, ProductMetadata } from "@/lib/products";
+import { extractCategories, formatPrice } from "@/lib/products";
 
 interface ProductDetailClientProps {
   product: Product;
@@ -26,9 +27,11 @@ export function ProductDetailClient({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [selectedCategory, setSelectedCategory] = useState<CategorySlug | null>(
+  const [selectedCategory, setSelectedCategory] = useState<ProductCategory | null>(
     initialCategory,
   );
+
+  const categories = useMemo(() => extractCategories(allProducts), [allProducts]);
 
   const filteredProducts = useMemo(
     () =>
@@ -66,7 +69,7 @@ export function ProductDetailClient({
   }, [pathname, searchParams]);
 
   const getCategoryHref = useCallback(
-    (category: CategorySlug) => {
+    (category: ProductCategory) => {
       const params = new URLSearchParams(searchParams.toString());
       params.set("categoria", category);
       return `${pathname}?${params.toString()}`;
@@ -146,17 +149,19 @@ export function ProductDetailClient({
       </div>
 
       {/* Products Grid */}
-      <div className="space-y-6">
+      <ProductPlaybackController className="space-y-6">
         {visibleProducts.map((item, index) => (
           <article
             key={`${item.metadata.id}-${index}`}
+            data-product-card-id={`${item.metadata.id}-${index}`}
             className="grid gap-4 rounded-2xl border border-neutral-200 bg-white p-4 sm:grid-cols-[1fr_1fr] sm:items-center"
           >
             {/* Media */}
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-neutral-100">
-              <MediaRenderer
+              <ProductMedia
+                id={`${item.metadata.id}-${index}`}
                 media={item.media}
-                alt={item.metadata.title}
+                label={item.metadata.title}
               />
             </div>
 
@@ -190,7 +195,7 @@ export function ProductDetailClient({
             </div>
           </article>
         ))}
-      </div>
+      </ProductPlaybackController>
 
       {/* Load More Sentinel */}
       <div

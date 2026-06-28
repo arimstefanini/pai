@@ -9,8 +9,15 @@ import { ProductDetailClient } from "@/components/ProductDetailClient";
 import {
   loadAllProducts,
   loadProductById,
+  PRODUCT_CATEGORIES,
+  type ProductCategory,
   type ProductMetadata,
 } from "@/lib/products";
+
+
+function isProductCategory(value: string): value is ProductCategory {
+  return PRODUCT_CATEGORIES.some((category) => category === value);
+}
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;
@@ -64,18 +71,9 @@ export default async function ProductPage({
   const allProducts = await loadAllProducts();
 
   // Validate category
-  const validCategories: ProductMetadata["category"][] = [
-    "casa",
-    "brinquedos",
-    "mecanicos",
-    "maquetes",
-    "rpg",
-    "variados",
-  ];
-
   const initialCategory: ProductMetadata["category"] | null =
-    categoria && validCategories.includes(categoria as any)
-      ? (categoria as ProductMetadata["category"])
+    categoria && isProductCategory(categoria)
+      ? categoria
       : null;
 
   return (

@@ -12,7 +12,6 @@ const MAX_DESCRIPTION_LENGTH = 1200;
 
 export function QuoteRequestForm({ initialMessage = "", product }: QuoteRequestFormProps) {
   const [submitted, setSubmitted] = useState(false);
-  const [fileName, setFileName] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [descriptionLength, setDescriptionLength] = useState(initialMessage.length);
 

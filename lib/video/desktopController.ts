@@ -12,7 +12,7 @@
 import { videoPlaybackManager } from "./videoManager";
 
 interface VideoElement {
-  videoRef: React.RefObject<HTMLVideoElement>;
+  videoRef: React.RefObject<HTMLVideoElement | null>;
   videoId: string;
 }
 
@@ -22,7 +22,7 @@ class DesktopPlaybackController {
   /**
    * Register a video element for hover control
    */
-  registerForHover(videoId: string, videoRef: React.RefObject<HTMLVideoElement>): void {
+  registerForHover(videoId: string, videoRef: React.RefObject<HTMLVideoElement | null>): void {
     this.videoElements.set(videoId, { videoId, videoRef });
 
     // Add event listeners

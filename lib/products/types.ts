@@ -9,6 +9,17 @@ export type ImageFormat = "jpg" | "jpeg" | "png" | "webp";
 
 export type VideoFormat = "mp4";
 
+export const PRODUCT_CATEGORIES = [
+  "casa",
+  "brinquedos",
+  "mecanicos",
+  "maquetes",
+  "rpg",
+  "variados",
+] as const;
+
+export type ProductCategory = (typeof PRODUCT_CATEGORIES)[number];
+
 export type FileFormat = ImageFormat | VideoFormat;
 
 /**
@@ -26,13 +37,7 @@ export interface ProductMetadata {
   slug: string;
 
   /** Category for filtering and organization */
-  category:
-    | "casa"
-    | "brinquedos"
-    | "mecanicos"
-    | "maquetes"
-    | "rpg"
-    | "variados";
+  category: ProductCategory;
 
   /** Whether product appears in featured sections */
   featured: boolean;
