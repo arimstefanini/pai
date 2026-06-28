@@ -1,0 +1,15 @@
+{
+  "id": "remedio",
+  "title": "Organizador de Remédios",
+  "slug": "remedio",
+  "category": "casa",
+  "featured": false,
+  "type": "video",
+  "description": "Caixa organizadora para remédios e vitaminas.",
+  "tags": ["Organização", "Saúde", "Casa"],
+  "story": "Cuide da sua saúde com organização.",
+  "cta": "Quero um",
+  "price": 49,
+  "limited": false,
+  "stock": 20
+}

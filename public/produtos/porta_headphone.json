@@ -1,0 +1,15 @@
+{
+  "id": "porta-headphone",
+  "title": "Suporte para Fone",
+  "slug": "porta-headphone",
+  "category": "casa",
+  "featured": false,
+  "type": "video",
+  "description": "Suporte elegante para guardar seus fones de ouvido.",
+  "tags": ["Tecnologia", "Organização", "Desk"],
+  "story": "Preserve seus fones com estilo.",
+  "cta": "Quero um",
+  "price": 49,
+  "limited": false,
+  "stock": 11
+}

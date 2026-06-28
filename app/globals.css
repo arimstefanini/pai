@@ -5,8 +5,8 @@
 :root {
   --background: #2e2e2e;
   --surface: #2e2e2e;
-  --text-primary: #f5f5f5;
-  --text-secondary: #d4d4d4;
+  --text-primary: #d4d4d4;
+  --text-secondary: #bdbdbd;
   --brand-primary: #000000;
   --brand-accent: #ff6b35;
   --border: #e5e5e5;
@@ -17,7 +17,7 @@
 .dark {
   --background: #111111;
   --surface: #171717;
-  --text-primary: #f5f5f5;
+  --text-primary: #d4d4d4;
   --text-secondary: #a3a3a3;
   --brand-primary: #f5f5f5;
   --brand-accent: #ff6b35;
@@ -106,5 +106,101 @@ body {
 .border-neutral-100,
 .border-neutral-200,
 .border-neutral-300 {
-  border-color: #4a4a4a !important;
+  border-color: transparent !important;
+}
+
+/* Fundo estilo viewport Blender com eixos em perspectiva */
+.axes-background {
+  position: relative;
+  background-color: #2e2e2e;
+  overflow: hidden;
+  --axes-x: 50%;
+  --axes-y: 50%;
+}
+
+.axes-background::before,
+.axes-background::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+/* Eixo X (vermelho): inclinado, vista de cima */
+.axes-background::before {
+  left: var(--axes-x);
+  top: var(--axes-y);
+  width: 140vmax;
+  height: 2px;
+  background: #ff4d4d;
+  transform-origin: left center;
+  transform: translate(-8%, -50%) rotate(-14deg) skewX(-8deg);
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.45);
+}
+
+/* Eixo Y (verde): angulo diferente para nao formar X perfeito */
+.axes-background::after {
+  left: var(--axes-x);
+  top: var(--axes-y);
+  width: 2px;
+  height: 140vmax;
+  background: #00ff88;
+  transform-origin: center top;
+  transform: translate(-50%, -22%) rotate(18deg) skewY(10deg);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.45);
+}
+
+/* Variacao deslocada do ponto de cruzamento */
+.axes-background--offset::before {
+  left: var(--axes-x);
+  top: var(--axes-y);
+}
+
+.axes-background--offset::after {
+  left: var(--axes-x);
+  top: var(--axes-y);
+}
+
+.axes-background--offset {
+  --axes-x: 40%;
+  --axes-y: 60%;
+}
+
+/* Fundo global inspirado no viewport do Blender */
+.global-axes-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  background: #2e2e2e;
+}
+
+.global-axis-x,
+.global-axis-y {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  opacity: 1;
+}
+
+.global-axis-x {
+  width: 420vw;
+  height: 2px;
+  background: rgba(176, 74, 74, 0.4);
+  transform-origin: center center;
+  transform: translate(-50%, -50%) rotate(-13deg) skewX(-7deg);
+  box-shadow: 0 0 6px rgba(176, 74, 74, 0.2);
+}
+
+.global-axis-y {
+  width: 2px;
+  height: 220vh;
+  background: rgba(74, 163, 107, 0.4);
+  transform-origin: center top;
+  transform: translate(-50%, -22%) rotate(19deg) skewY(10deg);
+  box-shadow: 0 0 6px rgba(74, 163, 107, 0.2);
 }

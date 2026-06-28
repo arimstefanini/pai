@@ -1,17 +1,40 @@
-﻿import { Benefits } from "@/components/Benefits";
+﻿/**
+ * Homepage
+ * Uses the file-based product CMS system
+ */
+
+import { Benefits } from "@/components/Benefits";
 import { CategorySection } from "@/components/CategorySection";
 import { CustomCTA } from "@/components/CustomCTA";
 import { Hero } from "@/components/Hero";
-import { MobileHomeBar } from "@/components/MobileHomeBar";
 import { ScarcityBanner } from "@/components/ScarcityBanner";
 import { Storytelling } from "@/components/Storytelling";
 import { Testimonials } from "@/components/Testimonials";
-import { categories, getCategoryPreview } from "@/lib/data";
+import {
+  getCategoriesWithCounts,
+  getCategoryPreview,
+  getFeaturedProducts,
+} from "@/lib/products/integration";
 
-export default function Home() {
+export default async function Home() {
+  // Load featured product for hero
+  const featured = await getFeaturedProducts(1);
+  const heroProduct = featured[0];
+
+  // Load categories with product counts
+  const categories = await getCategoriesWithCounts();
+
+  // Load products for each category
+  const categorySections = await Promise.all(
+    categories.map(async (category) => ({
+      category,
+      products: await getCategoryPreview(category.slug, 3),
+    })),
+  );
+
   return (
-    <div className="flex flex-col pb-24 sm:pb-0">
-      <Hero />
+    <div className="flex flex-col">
+      <Hero product={heroProduct} />
       <Storytelling />
 
       <section
@@ -28,11 +51,12 @@ export default function Home() {
         </div>
       </section>
 
-      {categories.map((category) => (
+      {/* Category sections */}
+      {categorySections.map(({ category, products }) => (
         <CategorySection
           key={category.slug}
           category={category}
-          products={getCategoryPreview(category.slug)}
+          products={products}
         />
       ))}
 
@@ -55,7 +79,6 @@ export default function Home() {
 
       <ScarcityBanner />
       <Testimonials />
-      <MobileHomeBar />
     </div>
   );
 }
