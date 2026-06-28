@@ -7,7 +7,6 @@ import { Benefits } from "@/components/Benefits";
 import { CategorySection } from "@/components/CategorySection";
 import { CustomCTA } from "@/components/CustomCTA";
 import { Hero } from "@/components/Hero";
-import { MobileHomeBar } from "@/components/MobileHomeBar";
 import { ScarcityBanner } from "@/components/ScarcityBanner";
 import { Storytelling } from "@/components/Storytelling";
 import { Testimonials } from "@/components/Testimonials";
@@ -34,7 +33,7 @@ export default async function Home() {
   );
 
   return (
-    <div className="flex flex-col pb-24 sm:pb-0">
+    <div className="flex flex-col">
       <Hero product={heroProduct} />
       <Storytelling />
 
@@ -80,7 +79,6 @@ export default async function Home() {
 
       <ScarcityBanner />
       <Testimonials />
-      <MobileHomeBar />
     </div>
   );
 }

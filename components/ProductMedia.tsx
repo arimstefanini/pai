@@ -14,8 +14,8 @@ interface ProductMediaProps {
 
 /**
  * ProductMedia
- * Auto-detects and renders product media (image or video)
- * Delegates to specialized components based on media type
+ * Dispatches to correct renderer based on media type
+ * Does not contain playback logic
  */
 export function ProductMedia({
   media,
@@ -24,16 +24,9 @@ export function ProductMedia({
   priority = false,
   onHover,
 }: ProductMediaProps) {
-  const isVideo = media.type === "video";
-
-  if (isVideo) {
+  if (media.type === "video") {
     return (
-      <ProductVideo
-        media={media}
-        alt={alt}
-        className={className}
-        onHover={onHover}
-      />
+      <ProductVideo media={media} alt={alt} className={className} onHover={onHover} />
     );
   }
 

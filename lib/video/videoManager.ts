@@ -1,7 +1,9 @@
 /**
  * VideoPlaybackManager
- * Centralizes video playback control across the application
+ * Core video playback control
  * Ensures only one video plays at a time
+ * 
+ * This is a simple manager - controllers decide WHEN to play/pause
  */
 
 type VideoRef = { current: HTMLVideoElement | null };
@@ -22,7 +24,6 @@ class VideoPlaybackManager {
    * Unregister a video element
    */
   unregister(id: string): void {
-    // If this video is currently playing, stop it
     if (this.currentlyPlayingId === id) {
       const video = this.registeredVideos.get(id);
       if (video?.current) {
@@ -36,20 +37,19 @@ class VideoPlaybackManager {
   }
 
   /**
-   * Play a specific video, pausing all others
+   * Play a video - pauses all others
    */
   play(id: string): void {
     const video = this.registeredVideos.get(id);
     if (!video?.current) return;
 
-    // Pause all other videos
+    // Pause all others
     this.pauseAll();
 
-    // Play the requested video
+    // Play this video
     this.currentlyPlayingId = id;
     video.current.play().catch(() => {
-      // Playback may fail due to autoplay policies
-      // This is expected behavior
+      // Autoplay may be blocked by browser
     });
     this.notifyListeners();
   }
@@ -87,21 +87,21 @@ class VideoPlaybackManager {
   }
 
   /**
-   * Get the ID of the currently playing video
-   */
-  getCurrentlyPlayingId(): string | null {
-    return this.currentlyPlayingId;
-  }
-
-  /**
-   * Check if a specific video is playing
+   * Check if a video is currently playing
    */
   isPlaying(id: string): boolean {
     return this.currentlyPlayingId === id;
   }
 
   /**
-   * Subscribe to playback state changes
+   * Get currently playing video ID
+   */
+  getCurrentlyPlayingId(): string | null {
+    return this.currentlyPlayingId;
+  }
+
+  /**
+   * Subscribe to playback changes
    */
   subscribe(listener: () => void): () => void {
     this.listeners.add(listener);
@@ -111,7 +111,7 @@ class VideoPlaybackManager {
   }
 
   /**
-   * Notify all listeners of state changes
+   * Notify listeners of state changes
    */
   private notifyListeners(): void {
     this.listeners.forEach((listener) => listener());
