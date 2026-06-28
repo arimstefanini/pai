@@ -51,7 +51,10 @@ export default async function OrcamentoPage({ searchParams }: Props) {
         </div>
 
         <div className="w-full">
-          <QuoteRequestForm initialMessage={suggestion} />
+          <QuoteRequestForm 
+            initialMessage={suggestion}
+            product={produto}
+          />
         </div>
       </div>
     </section>
