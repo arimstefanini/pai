@@ -3,6 +3,7 @@
  */
 
 import { ProductCard } from "@/components/ProductCard";
+import { ProductPlaybackController } from "@/components/playback/ProductPlaybackController";
 import type { Product } from "@/lib/products";
 
 interface CategoryPreviewProps {
@@ -11,10 +12,10 @@ interface CategoryPreviewProps {
 
 export function CategoryPreview({ products }: CategoryPreviewProps) {
   return (
-    <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <ProductPlaybackController className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {products.map((product) => (
         <ProductCard key={product.metadata.id} product={product} />
       ))}
-    </div>
+    </ProductPlaybackController>
   );
 }

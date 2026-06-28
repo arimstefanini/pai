@@ -1,41 +1,23 @@
-"use client";
+type ProductMediaProps = {
+  id: string;
+  src: string;
+  poster: string;
+  label: string;
+};
 
-import { ProductVideo } from "@/components/ProductVideo";
-import { ProductImage } from "@/components/ProductImage";
-import type { ProductMedia as ProductMediaType } from "@/lib/products/types";
-
-interface ProductMediaProps {
-  media: ProductMediaType;
-  alt: string;
-  className?: string;
-  priority?: boolean;
-  onHover?: (isHovering: boolean) => void;
-}
-
-/**
- * ProductMedia
- * Dispatches to correct renderer based on media type
- * Does not contain playback logic
- */
-export function ProductMedia({
-  media,
-  alt,
-  className = "",
-  priority = false,
-  onHover,
-}: ProductMediaProps) {
-  if (media.type === "video") {
-    return (
-      <ProductVideo media={media} alt={alt} className={className} onHover={onHover} />
-    );
-  }
-
+export function ProductMedia({ id, src, poster, label }: ProductMediaProps) {
   return (
-    <ProductImage
-      media={media}
-      alt={alt}
-      className={className}
-      priority={priority}
-    />
+    <video
+      data-product-video-id={id}
+      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+      muted
+      playsInline
+      preload="metadata"
+      poster={poster}
+      aria-label={label}
+    >
+      <source src={src} type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
   );
 }

@@ -1,17 +1,9 @@
-/**
- * ProductCard - Reusable product display component
- * Renders media (image or video), metadata, and actions
- * All data comes from JSON metadata - never hardcoded
- */
-
-"use client";
-
 import Link from "next/link";
 import { ProductMedia } from "@/components/ProductMedia";
 import { CustomCTA } from "@/components/CustomCTA";
-import { Badge } from "@/src/design-system/components/Badge";
-import type { Product } from "@/lib/products";
-import { formatPrice, getProductUrl, getCategoryName } from "@/lib/products";
+import { ProductMedia } from "@/components/ProductMedia";
+import type { Product } from "@/lib/data";
+import { formatBRL } from "@/lib/data";
 
 interface ProductCardProps {
   product: Product;
@@ -23,16 +15,19 @@ export function ProductCard({ product }: ProductCardProps) {
   const priceFormatted = formatPrice(metadata.price);
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-neutral-200/80 transition hover:shadow-md hover:ring-neutral-300">
-      {/* Media - Image or Video */}
+    <article
+      data-product-card-id={product.id}
+      className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-neutral-200/80 transition hover:shadow-md hover:ring-neutral-300"
+    >
       <Link
         href={getProductUrl(product)}
         className="relative block aspect-square overflow-hidden bg-neutral-100"
       >
         <ProductMedia
-          media={media}
-          alt={metadata.title}
-          className="transition duration-500 group-hover:scale-105"
+          id={product.id}
+          src="/video/videoBlender.mp4"
+          poster={product.images.studio}
+          label={`${product.name} em vídeo`}
         />
 
         {/* Badges */}
