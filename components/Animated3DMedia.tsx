@@ -36,7 +36,15 @@ export function Animated3DMedia({
   className = "",
 }: Animated3DMediaProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [useWebm] = useState(() => supportsWebmPlayback() && !likelySafari());
+  const [useWebm, setUseWebm] = useState(false);
+
+  useEffect(() => {
+    const frameId = window.requestAnimationFrame(() => {
+      setUseWebm(supportsWebmPlayback() && !likelySafari());
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -73,7 +81,7 @@ export function Animated3DMedia({
         preload="metadata"
         aria-label={posterLabel}
       >
-        <source src={source} type={sourceType} />
+        <source key={source} src={source} type={sourceType} />
         Seu navegador não suporta vídeo HTML5.
       </video>
       {!useWebm && (
