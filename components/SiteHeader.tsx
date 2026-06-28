@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const categoryMenu = [
   { href: "/galeria?categoria=casa", label: "CASA" },
@@ -18,9 +19,19 @@ export function SiteHeader() {
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:h-16 sm:px-6">
         <Link
           href="/"
-          className="text-sm font-semibold tracking-tight text-neutral-200 sm:text-base"
+          className="flex flex-col items-center gap-1"
         >
-          FORMA<span className="text-neutral-400">3D</span>
+          <Image
+            src="/image/logo.png"
+            alt="Stefanini Produções"
+            width={40}
+            height={40}
+            className="h-10 w-10"
+            priority
+          />
+          <span className="text-xs font-semibold tracking-tight text-neutral-200 sm:text-sm">
+            Stefanini<span className="text-neutral-400">Produções</span>
+          </span>
         </Link>
         <nav className="flex items-center gap-1 sm:gap-4" aria-label="Principal">
           <div className="group relative">

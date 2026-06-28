@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "FORMA3D — Ideias em objetos reais",
-    template: "%s | FORMA3D",
+    default: "Stefanini Produções — Ideias em objetos reais",
+    template: "%s | Stefanini Produções",
   },
   description:
     "Impressão 3D premium sob medida. Casa, brinquedos, peças mecânicas, maquetes e projetos exclusivos. Você imagina. A gente cria.",
