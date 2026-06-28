@@ -1,49 +1,87 @@
+/**
+ * Dynamic product page
+ * Uses the file-based CMS system for product data
+ */
+
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductDetailClient } from "@/components/ProductDetailClient";
-import { getProductById, products, type CategorySlug } from "@/lib/data";
+import {
+  loadAllProducts,
+  loadProductById,
+  type ProductMetadata,
+} from "@/lib/products";
 
-type Props = {
+interface ProductPageProps {
   params: Promise<{ id: string }>;
   searchParams: Promise<{ categoria?: string }>;
-};
-
-const allowedCategories: CategorySlug[] = [
-  "casa",
-  "brinquedos",
-  "mecanicos",
-  "maquetes",
-  "variados",
-];
-
-export async function generateStaticParams() {
-  return products.map((p) => ({ id: p.id }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+/**
+ * Generate static params for all products
+ */
+export async function generateStaticParams() {
+  const products = await loadAllProducts();
+  return products.map((p) => ({ id: p.metadata.id }));
+}
+
+/**
+ * Generate metadata for SEO
+ */
+export async function generateMetadata({
+  params,
+}: ProductPageProps): Promise<Metadata> {
   const { id } = await params;
-  const product = getProductById(id);
-  if (!product) return { title: "Produto" };
+  const product = await loadProductById(id);
+
+  if (!product) {
+    return { title: "Produto" };
+  }
+
   return {
-    title: product.name,
-    description: product.description,
+    title: product.metadata.title,
+    description: product.metadata.description,
   };
 }
 
-export default async function ProductPage({ params, searchParams }: Props) {
+/**
+ * Product detail page
+ */
+export default async function ProductPage({
+  params,
+  searchParams,
+}: ProductPageProps) {
   const { id } = await params;
   const { categoria } = await searchParams;
 
-  const product = getProductById(id);
-  if (!product) notFound();
-  const initialCategory = allowedCategories.includes(categoria as CategorySlug)
-    ? (categoria as CategorySlug)
-    : null;
+  // Load specific product
+  const product = await loadProductById(id);
+  if (!product) {
+    notFound();
+  }
+
+  // Load all products
+  const allProducts = await loadAllProducts();
+
+  // Validate category
+  const validCategories: ProductMetadata["category"][] = [
+    "casa",
+    "brinquedos",
+    "mecanicos",
+    "maquetes",
+    "rpg",
+    "variados",
+  ];
+
+  const initialCategory: ProductMetadata["category"] | null =
+    categoria && validCategories.includes(categoria as any)
+      ? (categoria as ProductMetadata["category"])
+      : null;
 
   return (
     <ProductDetailClient
       product={product}
-      allProducts={products}
+      allProducts={allProducts}
       initialCategory={initialCategory}
     />
   );

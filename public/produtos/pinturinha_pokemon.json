@@ -1,0 +1,15 @@
+{
+  "id": "pinturinha-pokemon",
+  "title": "Quadro Pokémon",
+  "slug": "pinturinha-pokemon",
+  "category": "brinquedos",
+  "featured": false,
+  "type": "video",
+  "description": "Quadro temático Pokémon para fãs da série.",
+  "tags": ["Temático", "Pokémon", "Quadro", "Infantil"],
+  "story": "Capture a magia Pokémon.",
+  "cta": "Quero esse quadro",
+  "price": 99,
+  "limited": false,
+  "stock": 5
+}

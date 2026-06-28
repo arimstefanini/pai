@@ -1,0 +1,15 @@
+{
+  "id": "menu",
+  "title": "Menu Personalizado",
+  "slug": "menu",
+  "category": "casa",
+  "featured": false,
+  "type": "video",
+  "description": "Menu decorativo personalizável para cozinha.",
+  "tags": ["Cozinha", "Decoração", "Personalizado"],
+  "story": "Seu cardápio com estilo.",
+  "cta": "Quero um para minha cozinha",
+  "price": 49,
+  "limited": false,
+  "stock": 20
+}

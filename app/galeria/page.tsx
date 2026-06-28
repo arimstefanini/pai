@@ -1,20 +1,44 @@
+/**
+ * Galeria de produtos - Instagram-like gallery
+ * Loads products from the file-based CMS system
+ */
+
 import { notFound } from "next/navigation";
 import { ProductDetailClient } from "@/components/ProductDetailClient";
-import { products, type CategorySlug, getProductById } from "@/lib/data";
+import {
+  loadAllProducts,
+  filterProducts,
+  extractCategories,
+  type ProductMetadata,
+} from "@/lib/products";
 
-type Props = {
+interface GaleriaPageProps {
   searchParams: Promise<{ categoria?: string }>;
-};
+}
 
-export default async function GaleriaPage({ searchParams }: Props) {
+export default async function GaleriaPage({ searchParams }: GaleriaPageProps) {
   const { categoria } = await searchParams;
 
-  const allowedCategories = ["casa", "brinquedos", "mecanicos", "maquetes"];
-  const initialCategory = allowedCategories.includes(categoria as CategorySlug)
-    ? (categoria as CategorySlug)
-    : null;
+  // Load all products
+  const allProducts = await loadAllProducts();
 
-  const fallbackProduct = getProductById("vaso-orbita") ?? products[0];
+  if (allProducts.length === 0) {
+    notFound();
+  }
+
+  // Get available categories
+  const categories = extractCategories(allProducts);
+  const validCategories = categories.map((c) => c.slug);
+
+  // Validate requested category
+  const initialCategory: ProductMetadata["category"] | null =
+    categoria && validCategories.includes(categoria as any)
+      ? (categoria as ProductMetadata["category"])
+      : null;
+
+  // Get first featured product or fallback to first product
+  const fallbackProduct =
+    allProducts.find((p) => p.metadata.featured) ?? allProducts[0];
 
   if (!fallbackProduct) {
     notFound();
@@ -23,7 +47,7 @@ export default async function GaleriaPage({ searchParams }: Props) {
   return (
     <ProductDetailClient
       product={fallbackProduct}
-      allProducts={products}
+      allProducts={allProducts}
       initialCategory={initialCategory}
     />
   );

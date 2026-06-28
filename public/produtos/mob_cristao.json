@@ -1,0 +1,15 @@
+{
+  "id": "mob-cristao",
+  "title": "Móbile Cristão",
+  "slug": "mob-cristao",
+  "category": "brinquedos",
+  "featured": false,
+  "type": "video",
+  "description": "Móbile temático com elementos cristãos para berço.",
+  "tags": ["Infantil", "Decoração", "Temático", "Berço"],
+  "story": "Fé que embalança.",
+  "cta": "Quero para meu bebê",
+  "price": 129,
+  "limited": false,
+  "stock": 6
+}

@@ -1,0 +1,15 @@
+{
+  "id": "pinturinha-blue",
+  "title": "Pintura Azul",
+  "slug": "pinturinha-blue",
+  "category": "casa",
+  "featured": false,
+  "type": "video",
+  "description": "Quadro artístico com tons azuis para decoração.",
+  "tags": ["Arte", "Quadro", "Decoração", "Parede"],
+  "story": "Tranquilidade em cores.",
+  "cta": "Quero esse quadro",
+  "price": 179,
+  "limited": true,
+  "stock": 2
+}
