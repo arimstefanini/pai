@@ -7,10 +7,16 @@ import { notFound } from "next/navigation";
 import { ProductDetailClient } from "@/components/ProductDetailClient";
 import {
   loadAllProducts,
-  filterProducts,
   extractCategories,
+  PRODUCT_CATEGORIES,
+  type ProductCategory,
   type ProductMetadata,
 } from "@/lib/products";
+
+
+function isProductCategory(value: string): value is ProductCategory {
+  return PRODUCT_CATEGORIES.some((category) => category === value);
+}
 
 interface GaleriaPageProps {
   searchParams: Promise<{ categoria?: string }>;
@@ -27,13 +33,12 @@ export default async function GaleriaPage({ searchParams }: GaleriaPageProps) {
   }
 
   // Get available categories
-  const categories = extractCategories(allProducts);
-  const validCategories = categories.map((c) => c.slug);
+  const availableCategories = new Set(extractCategories(allProducts).map((category) => category.slug));
 
   // Validate requested category
   const initialCategory: ProductMetadata["category"] | null =
-    categoria && validCategories.includes(categoria as any)
-      ? (categoria as ProductMetadata["category"])
+    categoria && isProductCategory(categoria) && availableCategories.has(categoria)
+      ? categoria
       : null;
 
   // Get first featured product or fallback to first product

@@ -20,13 +20,24 @@ const PRODUCTS_DIR = join(process.cwd(), "public/produtos");
 const VALID_IMAGE_FORMATS = ["jpg", "jpeg", "png", "webp"] as const;
 const VALID_VIDEO_FORMATS = ["mp4"] as const;
 
+type ValidImageFormat = (typeof VALID_IMAGE_FORMATS)[number];
+type ValidVideoFormat = (typeof VALID_VIDEO_FORMATS)[number];
+
+function isValidImageFormat(format: string): format is ValidImageFormat {
+  return VALID_IMAGE_FORMATS.some((validFormat) => validFormat === format);
+}
+
+function isValidVideoFormat(format: string): format is ValidVideoFormat {
+  return VALID_VIDEO_FORMATS.some((validFormat) => validFormat === format);
+}
+
 /**
  * Detect media type from file extension
  */
 function getMediaType(format: string): MediaType | null {
   const lower = format.toLowerCase();
-  if (VALID_IMAGE_FORMATS.includes(lower as any)) return "image";
-  if (VALID_VIDEO_FORMATS.includes(lower as any)) return "video";
+  if (isValidImageFormat(lower)) return "image";
+  if (isValidVideoFormat(lower)) return "video";
   return null;
 }
 
@@ -36,8 +47,8 @@ function getMediaType(format: string): MediaType | null {
 function getFileFormat(ext: string): FileFormat | null {
   const format = ext.toLowerCase().substring(1); // remove leading dot
   if (
-    VALID_IMAGE_FORMATS.includes(format as any) ||
-    VALID_VIDEO_FORMATS.includes(format as any)
+    isValidImageFormat(format) ||
+    isValidVideoFormat(format)
   ) {
     return format as FileFormat;
   }

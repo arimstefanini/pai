@@ -44,7 +44,7 @@ export function sendQuoteToWhatsapp(data: QuoteFormData): { success: boolean; er
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
     return { success: true };
-  } catch (err) {
+  } catch {
     return {
       success: false,
       error: "Erro ao abrir WhatsApp. Tente novamente.",

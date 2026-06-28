@@ -7,9 +7,7 @@ import type { ProductMedia as ProductMediaType } from "@/lib/products/types";
 
 interface ProductVideoProps {
   media: ProductMediaType;
-  alt: string;
   className?: string;
-  onHover?: (isHovering: boolean) => void;
 }
 
 /**
@@ -21,17 +19,12 @@ interface ProductVideoProps {
  */
 export function ProductVideo({
   media,
-  alt,
   className = "",
-  onHover,
 }: ProductVideoProps) {
   const deviceType = useDeviceType();
 
   // Desktop: use hover controller
-  const desktopPlayback = useVideoPlayback({
-    onPlay: () => onHover?.(true),
-    onPause: () => onHover?.(false),
-  });
+  const desktopPlayback = useVideoPlayback();
 
   // Mobile: use scroll controller
   const mobilePlayback = useMobileVideoPlayback();
