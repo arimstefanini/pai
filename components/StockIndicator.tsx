@@ -1,15 +1,27 @@
-type Props = {
-  count: number;
-};
+/**
+ * StockIndicator - Shows product availability status
+ */
 
-export function StockIndicator({ count }: Props) {
+import type { Product } from "@/lib/products";
+import { getStockStatus } from "@/lib/products";
+
+interface StockIndicatorProps {
+  product: Product;
+}
+
+export function StockIndicator({ product }: StockIndicatorProps) {
+  const { label, status } = getStockStatus(product);
+
+  const statusColors = {
+    available: "text-green-600 bg-green-50 border-green-200",
+    low: "text-amber-600 bg-amber-50 border-amber-200",
+    out: "text-neutral-500 bg-neutral-100 border-neutral-200",
+  };
+
   return (
-    <p className="text-sm font-medium text-neutral-700">
-      Restam{" "}
-      <span className="tabular-nums font-semibold text-neutral-900">
-        {count}
-      </span>{" "}
-      {count === 1 ? "unidade" : "unidades"}
+    <p className={`text-xs font-medium px-2.5 py-1.5 rounded-lg border ${statusColors[status]}`}>
+      {label}
     </p>
   );
 }
+

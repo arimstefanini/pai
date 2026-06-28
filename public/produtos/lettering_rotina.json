@@ -1,0 +1,15 @@
+{
+  "id": "lettering-rotina",
+  "title": "Quadro de Rotina",
+  "slug": "lettering-rotina",
+  "category": "brinquedos",
+  "featured": false,
+  "type": "video",
+  "description": "Quadro interativo para organizar a rotina das crianças.",
+  "tags": ["Educativo", "Organização", "Infantil", "Parede"],
+  "story": "Organize a rotina com diversão.",
+  "cta": "Quero organizar",
+  "price": 89,
+  "limited": false,
+  "stock": 7
+}

@@ -1,0 +1,15 @@
+{
+  "id": "maquete",
+  "title": "Maquete Arquitetônica",
+  "slug": "maquete",
+  "category": "maquetes",
+  "featured": true,
+  "type": "video",
+  "description": "Modelo 3D de projeto arquitetônico em alta resolução.",
+  "tags": ["Arquitetura", "Modelo", "Projeto", "Profissional"],
+  "story": "Visualize seu projeto em 3D.",
+  "cta": "Quero uma maquete do meu projeto",
+  "price": 599,
+  "limited": false,
+  "stock": 2
+}

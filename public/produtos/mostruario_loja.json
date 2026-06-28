@@ -1,0 +1,15 @@
+{
+  "id": "mostruario-loja",
+  "title": "Mostrador de Loja",
+  "slug": "mostruario-loja",
+  "category": "variados",
+  "featured": false,
+  "type": "video",
+  "description": "Suporte organizador para expor produtos em loja.",
+  "tags": ["Comercial", "Organização", "Loja", "Expositor"],
+  "story": "Apresente seus produtos com elegância.",
+  "cta": "Quero para meu comércio",
+  "price": 449,
+  "limited": false,
+  "stock": 3
+}

@@ -1,0 +1,15 @@
+{
+  "id": "vaso",
+  "title": "Vaso Decorativo",
+  "slug": "vaso",
+  "category": "casa",
+  "featured": true,
+  "type": "video",
+  "description": "Vaso minimalista em cerâmica de alta qualidade.",
+  "tags": ["Vaso", "Decoração", "Cerâmica", "Casa"],
+  "story": "Simplicidade que impressiona.",
+  "cta": "Quero um",
+  "price": 89,
+  "limited": false,
+  "stock": 11
+}

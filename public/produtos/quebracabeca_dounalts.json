@@ -1,0 +1,15 @@
+{
+  "id": "quebracabeca-donalts",
+  "title": "Quebra-cabeça Donalts",
+  "slug": "quebracabeca-donalts",
+  "category": "brinquedos",
+  "featured": false,
+  "type": "video",
+  "description": "Quebra-cabeça temático com personagens divertidos.",
+  "tags": ["Brinquedo", "Educativo", "Puzzle"],
+  "story": "Divirta-se montando histórias.",
+  "cta": "Quero um",
+  "price": 59,
+  "limited": false,
+  "stock": 18
+}

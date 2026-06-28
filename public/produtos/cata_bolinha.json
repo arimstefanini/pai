@@ -1,0 +1,15 @@
+{
+  "id": "cata-bolinha",
+  "title": "Cata-Bolinha Automático",
+  "slug": "cata-bolinha",
+  "category": "brinquedos",
+  "featured": false,
+  "type": "video",
+  "description": "Brinquedo educativo que estimula aprendizagem e coordenação.",
+  "tags": ["Educativo", "Crianças", "Brinquedo"],
+  "story": "Diversão que ensina.",
+  "cta": "Quero comprar",
+  "price": 89,
+  "limited": false,
+  "stock": 12
+}

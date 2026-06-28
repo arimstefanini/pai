@@ -1,13 +1,25 @@
+/**
+ * Category section component
+ * Displays a category with preview products
+ */
+
 import Link from "next/link";
-import type { Category, Product } from "@/lib/data";
 import { CategoryPreview } from "@/components/CategoryPreview";
+import type { Product } from "@/lib/products";
 
-type Props = {
-  category: Category;
+interface CategorySectionProps {
+  category: {
+    slug: string;
+    name: string;
+    description: string;
+  };
   products: Product[];
-};
+}
 
-export function CategorySection({ category, products }: Props) {
+export function CategorySection({
+  category,
+  products,
+}: CategorySectionProps) {
   return (
     <section className="border-t border-neutral-100 py-14 sm:py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -16,7 +28,9 @@ export function CategorySection({ category, products }: Props) {
             <h2 className="text-2xl font-semibold tracking-tight text-neutral-900">
               {category.name}
             </h2>
-            <p className="mt-2 text-sm text-neutral-600">{category.description}</p>
+            <p className="mt-2 text-sm text-neutral-600">
+              {category.description}
+            </p>
           </div>
           <Link
             href={`/galeria?categoria=${category.slug}`}

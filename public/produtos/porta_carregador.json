@@ -1,0 +1,15 @@
+{
+  "id": "porta-carregador",
+  "title": "Porta Carregador",
+  "slug": "porta-carregador",
+  "category": "casa",
+  "featured": false,
+  "type": "video",
+  "description": "Suporte organizador para cabos e carregadores.",
+  "tags": ["Organização", "Tecnologia", "Mesa"],
+  "story": "Cabos organizados, espaço limpo.",
+  "cta": "Quero organizar meus cabos",
+  "price": 39,
+  "limited": false,
+  "stock": 16
+}

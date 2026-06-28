@@ -1,0 +1,15 @@
+{
+  "id": "play-pao",
+  "title": "Play Pão",
+  "slug": "play-pao",
+  "category": "brinquedos",
+  "featured": false,
+  "type": "video",
+  "description": "Brinquedo criativo em formato de pão.",
+  "tags": ["Brinquedo", "Criativo", "Infantil"],
+  "story": "Diversão que alimenta a imaginação.",
+  "cta": "Quero um",
+  "price": 39,
+  "limited": false,
+  "stock": 25
+}
