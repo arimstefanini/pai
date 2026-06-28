@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { CustomCTA } from "@/components/CustomCTA";
+import { ProductMedia } from "@/components/ProductMedia";
 import type { Product } from "@/lib/data";
 import { formatBRL } from "@/lib/data";
 
@@ -8,17 +8,19 @@ type Props = { product: Product };
 
 export function ProductCard({ product }: Props) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-neutral-200/80 transition hover:shadow-md hover:ring-neutral-300">
+    <article
+      data-product-card-id={product.id}
+      className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-neutral-200/80 transition hover:shadow-md hover:ring-neutral-300"
+    >
       <Link
         href={`/produto/${product.id}`}
         className="relative block aspect-square overflow-hidden bg-neutral-100"
       >
-        <Image
-          src={product.images.studio}
-          alt={product.name}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition duration-500 group-hover:scale-105"
+        <ProductMedia
+          id={product.id}
+          src="/video/videoBlender.mp4"
+          poster={product.images.studio}
+          label={`${product.name} em vídeo`}
         />
         <div className="absolute left-3 top-3 flex flex-wrap gap-2">
           {product.limitedEdition && (

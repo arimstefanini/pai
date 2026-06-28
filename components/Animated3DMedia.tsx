@@ -36,12 +36,7 @@ export function Animated3DMedia({
   className = "",
 }: Animated3DMediaProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [useWebm, setUseWebm] = useState(false);
-
-  useEffect(() => {
-    // Safari costuma não renderizar alpha em WebM de forma consistente.
-    setUseWebm(supportsWebmPlayback() && !likelySafari());
-  }, []);
+  const [useWebm] = useState(() => supportsWebmPlayback() && !likelySafari());
 
   useEffect(() => {
     const video = videoRef.current;
