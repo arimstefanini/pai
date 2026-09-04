@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: "%s | Stefanini Produções",
   },
   description:
-    "Impressão 3D premium sob medida. Casa, brinquedos, peças mecânicas, maquetes e projetos exclusivos. Você imagina. A gente cria.",
+    "Impressão 3D premium sob medida. Letreiros, peças mecânicas, maquetes e projetos exclusivos. Você imagina. A gente cria.",
 };
 
 export default function RootLayout({

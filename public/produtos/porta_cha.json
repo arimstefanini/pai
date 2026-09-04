@@ -2,12 +2,17 @@
   "id": "porta-cha",
   "title": "Porta Chá",
   "slug": "porta-cha",
-  "category": "casa",
+  "category": "variados",
   "featured": false,
   "type": "video",
   "description": "Suporte organizador para saquinhos de chá.",
-  "tags": ["Cozinha", "Organização", "Chá"],
+  "tags": [
+    "Cozinha",
+    "Organização",
+    "Chá"
+  ],
   "story": "Organize seu ritual de chá.",
   "cta": "Quero um",
-  "limited": false
+  "limited": false,
+  "price": 150
 }

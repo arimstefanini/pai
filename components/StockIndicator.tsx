@@ -15,7 +15,7 @@ export function StockIndicator({ product }: StockIndicatorProps) {
   const statusColors = {
     available: "text-green-600 bg-green-50 border-green-200",
     low: "text-amber-600 bg-amber-50 border-amber-200",
-    out: "text-neutral-500 bg-neutral-100 border-neutral-200",
+    out: "borderal-500 -neutral-200",
   };
 
   return (

@@ -12,7 +12,7 @@ function Badge({ children, variant = "default" }: { children: React.ReactNode; v
   const classes =
     variant === "attention"
       ? "bg-amber-100 text-amber-900 ring-amber-200"
-      : "text-neutral-800 ring-neutral-200";
+      : "bg-[#d4d4d4] text-[#2A628F] ring-[#2A628F]/30";
 
   return (
     <span className={`rounded-full px-2.5 py-1 text-xs font-semibold shadow-sm ring-1 ${classes}`}>
@@ -33,7 +33,7 @@ export function ProductCard({ product }: ProductCardProps) {
     >
       <Link
         href={productUrl}
-        className="relative block aspect-square overflow-hidden bg-neutral-100"
+        className="relative block aspect-square overflow-hidden "
       >
         <ProductMedia
           id={metadata.id}

@@ -19,7 +19,7 @@ export default function CheckoutPage() {
       <div className="mt-8">
         <Suspense
           fallback={
-            <div className="h-40 animate-pulse rounded-2xl bg-neutral-200/80" />
+            <div className="h-40 animate-pulse rounded-2xl " />
           }
         >
           <CheckoutForm />

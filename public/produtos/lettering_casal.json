@@ -2,11 +2,16 @@
   "id": "lettering-casal",
   "title": "Lettering para Casal",
   "slug": "lettering-casal",
-  "category": "casa",
+  "category": "totem",
   "featured": false,
   "type": "video",
   "description": "Placa decorativa com nomes para casais.",
-  "tags": ["Lettering", "Casal", "Decoração", "Presente"],
+  "tags": [
+    "Lettering",
+    "Casal",
+    "Decoração",
+    "Presente"
+  ],
   "story": "Eternize seu amor.",
   "cta": "Quero criar um",
   "limited": false

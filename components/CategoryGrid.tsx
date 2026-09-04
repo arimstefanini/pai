@@ -1,8 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { categories } from "@/lib/data";
+import {
+  extractCategories,
+  loadAllProducts,
+} from "@/lib/products";
 
-export function CategoryGrid() {
+export async function CategoryGrid() {
+  const products = await loadAllProducts();
+  const categories = extractCategories(products);
+
   return (
     <section
       id="categorias"
@@ -18,33 +24,40 @@ export function CategoryGrid() {
         </p>
 
         <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((cat) => (
-            <li key={cat.slug}>
-              <Link
-                href={`/categoria/${cat.slug}`}
-                className="group block overflow-hidden rounded-2xl bg-neutral-100 ring-1 ring-neutral-200/80 transition hover:ring-neutral-300"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <Image
-                    src={cat.coverImage}
-                    alt=""
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
-                    <span className="text-lg font-semibold text-white sm:text-xl">
-                      {cat.name}
-                    </span>
-                    <p className="mt-1 text-sm text-white/90">
-                      {cat.shortDescription}
-                    </p>
+          {categories.map((cat) => {
+            const categoryProducts = products.filter(
+              (product) => product.metadata.category === cat.slug,
+            );
+            const coverImage = categoryProducts[0]?.media.url ?? "/produtos/placeholder.jpg";
+
+            return (
+              <li key={cat.slug}>
+                <Link
+                  href={`/categoria/${cat.slug}`}
+                  className="group block overflow-hidden rounded-2xl  ring-1 ring-neutral-200/80 transition hover:ring-neutral-300"
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <Image
+                      src={coverImage}
+                      alt=""
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+                      <span className="text-lg font-semibold text-white sm:text-xl">
+                        {cat.name}
+                      </span>
+                      <p className="mt-1 text-sm text-white/90">
+                        {cat.description}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </li>
-          ))}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>

@@ -10,12 +10,18 @@ export type {
   ProductMedia,
   Category,
   ProductFilterOptions,
-  ProductCategory,
+  ProductCategoryValue,
   MediaType,
   FileFormat,
 } from "./types";
 
-export { PRODUCT_CATEGORIES } from "./types";
+export {
+  ProductCategory,
+  PRODUCT_CATEGORIES,
+  CATEGORY_LABELS,
+  CATEGORY_DESCRIPTIONS,
+  isValidProductCategory,
+} from "./types";
 
 // Loader
 export {

@@ -1,0 +1,18 @@
+{
+  "id": "avatar_realistico",
+  "title": "Avatar Realístico",
+  "slug": "avatar_realistico",
+  "category": "avatar",
+  "featured": false,
+  "type": "image",
+  "description": "Peça decorativa inspirada em pessoas reais 20cm.",
+  "tags": [
+    "decoracao",
+    "avatar",
+    "presente"
+  ],
+  "story": "Um item divertido que traz personalidade ao ambiente.",
+  "cta": "Quero um parecido",
+  "limited": false,
+  "price": 230
+}

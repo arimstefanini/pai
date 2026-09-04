@@ -39,7 +39,7 @@ Coloque dois arquivos na pasta `public/produtos/`:
   "id": "nome-do-produto",
   "title": "Nome do Produto",
   "slug": "nome-do-produto",
-  "category": "casa",
+  "category": "avatar",
   "featured": false,
   "type": "video",
   "description": "Descrição breve do produto.",
@@ -70,7 +70,7 @@ Nenhuma alteração no código necessária.
 | `id` | string | Sim | ID único (deve ser igual ao nome do arquivo) |
 | `title` | string | Sim | Título do produto |
 | `slug` | string | Sim | URL-friendly slug (usado em links) |
-| `category` | string | Sim | Categoria: `casa`, `brinquedos`, `mecanicos`, `maquetes`, `rpg`, `variados` |
+| `category` | string | Sim | Categoria: `avatar`, `totem`, `mecanicos`, `maquetes`, `rpg`, `variados` |
 | `featured` | boolean | Sim | Se aparece em seções especiais |
 | `type` | string | Sim | Tipo de mídia: `image` ou `video` |
 | `description` | string | Sim | Descrição breve |
@@ -127,7 +127,7 @@ const product = await loadProductBySlug("nome-do-produto");
 import { filterProducts } from "@/lib/products";
 
 // Por categoria
-const casa = filterProducts(products, { category: "casa" });
+const avatar = filterProducts(products, { category: "avatar" });
 
 // Por featured
 const featured = filterProducts(products, { featured: true });
@@ -137,7 +137,7 @@ const results = filterProducts(products, { search: "vaso" });
 
 // Combinar
 const limited = filterProducts(products, {
-  category: "casa",
+  category: "avatar",
   limited: true,
 });
 ```
@@ -156,7 +156,7 @@ const categories = extractCategories(products);
 import { formatPrice, getCategoryName, getStockStatus } from "@/lib/products";
 
 const priceStr = formatPrice(product.metadata.price); // "R$ 99"
-const catName = getCategoryName(product.metadata.category); // "Casa"
+const catName = getCategoryName(product.metadata.category); // "Avatar"
 const stock = getStockStatus(product); // { label: "5 em estoque", status: "low" }
 ```
 
@@ -275,7 +275,7 @@ Arquivo: public/produtos/vaso-minimalista.json
   "id": "vaso-minimalista",
   "title": "Vaso Minimalista Branco",
   "slug": "vaso-minimalista",
-  "category": "casa",
+  "category": "avatar",
   "featured": true,
   "type": "image",
   "description": "Vaso em cerâmica com design minimalista e acabamento liso.",
@@ -295,7 +295,7 @@ Arquivo: public/produtos/vaso-minimalista.jpg
 
 **Resultado**: Produto aparece automaticamente em:
 - Galeria `/galeria`
-- Categoria `/categoria/casa`
+- Categoria `/categoria/avatar`
 - Página individual `/produto/vaso-minimalista`
 - Na seção de produtos em destaque da homepage
 

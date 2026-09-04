@@ -192,7 +192,9 @@ export async function loadAllProducts(): Promise<Product[]> {
  */
 export async function loadProductById(id: string): Promise<Product | null> {
   const products = await loadAllProducts();
-  return products.find((p) => p.metadata.id === id) ?? null;
+  return (
+    products.find((p) => p.metadata.id === id || p.metadata.slug === id) ?? null
+  );
 }
 
 /**

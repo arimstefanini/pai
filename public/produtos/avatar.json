@@ -1,0 +1,18 @@
+{
+  "id": "avatar",
+  "title": "Avatar Decorativo",
+  "slug": "avatar",
+  "category": "avatar",
+  "featured": false,
+  "type": "image",
+  "description": "Peça decorativa inspirada em avatares — ideal para prateleiras e presentes.",
+  "tags": [
+    "decoracao",
+    "avatar",
+    "presente"
+  ],
+  "story": "Um item divertido que traz personalidade ao ambiente.",
+  "cta": "Quero um parecido",
+  "limited": false,
+  "price": 249
+}

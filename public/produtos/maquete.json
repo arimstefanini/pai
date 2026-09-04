@@ -5,9 +5,15 @@
   "category": "maquetes",
   "featured": true,
   "type": "video",
-  "description": "Modelo 3D de projeto arquitetônico em alta resolução.",
-  "tags": ["Arquitetura", "Modelo", "Projeto", "Profissional"],
+  "description": "Modelo 3D de projeto arquitetônico em alta resolução, preço por metro quadrado.",
+  "tags": [
+    "Arquitetura",
+    "Modelo",
+    "Projeto",
+    "Profissional"
+  ],
   "story": "Visualize seu projeto em 3D.",
   "cta": "Quero uma maquete do meu projeto",
-  "limited": false
+  "limited": false,
+  "price": 3.80
 }

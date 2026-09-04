@@ -2,11 +2,16 @@
   "id": "lettering-porta",
   "title": "Lettering Porta",
   "slug": "lettering-porta",
-  "category": "casa",
+  "category": "totem",
   "featured": false,
   "type": "video",
   "description": "Placa personalizada para decorar portas.",
-  "tags": ["Lettering", "Porta", "Decoração", "Casa"],
+  "tags": [
+    "Lettering",
+    "Porta",
+    "Decoração",
+    "Avatar"
+  ],
   "story": "Bem-vindo ao seu espaço.",
   "cta": "Quero uma para minha porta",
   "limited": false

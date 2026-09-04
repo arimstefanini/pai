@@ -2,11 +2,15 @@
   "id": "remedio",
   "title": "Organizador de Remédios",
   "slug": "remedio",
-  "category": "casa",
+  "category": "variados",
   "featured": false,
   "type": "video",
   "description": "Caixa organizadora para remédios e vitaminas.",
-  "tags": ["Organização", "Saúde", "Casa"],
+  "tags": [
+    "Organização",
+    "Saúde",
+    "Avatar"
+  ],
   "story": "Cuide da sua saúde com organização.",
   "cta": "Quero um",
   "limited": false

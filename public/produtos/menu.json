@@ -2,11 +2,15 @@
   "id": "menu",
   "title": "Menu Personalizado",
   "slug": "menu",
-  "category": "casa",
+  "category": "totem",
   "featured": false,
   "type": "video",
   "description": "Menu decorativo personalizável para cozinha.",
-  "tags": ["Cozinha", "Decoração", "Personalizado"],
+  "tags": [
+    "Cozinha",
+    "Decoração",
+    "Personalizado"
+  ],
   "story": "Seu cardápio com estilo.",
   "cta": "Quero um para minha cozinha",
   "limited": false

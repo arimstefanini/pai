@@ -2,7 +2,12 @@
  * Product utilities
  */
 
-import type { Product, ProductMetadata, MediaType } from "./types";
+import {
+  CATEGORY_LABELS,
+  type Product,
+  type ProductMetadata,
+  type MediaType,
+} from "./types";
 
 /**
  * Check if a product is valid and ready to use
@@ -28,13 +33,15 @@ export function getMediaTypeLabel(type: MediaType): string {
  * Format price as currency
  */
 export function formatPrice(price: number | undefined, locale = "pt-BR"): string {
-  if (price === undefined || price === null) return "";
-  return new Intl.NumberFormat(locale, {
+  if (price === undefined || price === null) return "Sob Consulta";
+  const formatted = new Intl.NumberFormat(locale, {
     style: "currency",
     currency: "BRL",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(price);
+
+  return `A PARTIR DE ${formatted}`;
 }
 
 /**
@@ -79,7 +86,7 @@ export function getStockStatus(
 
   if (typeof s !== "number") {
     return {
-      label: "Quantidade indisponível",
+      label: "Solicitação sob medida",
       status: "out",
     };
   }
@@ -119,13 +126,5 @@ export function getBreadcrumbs(product: Product): Array<{label: string; href: st
  * Get category display name
  */
 export function getCategoryName(category: ProductMetadata["category"]): string {
-  const names: Record<ProductMetadata["category"], string> = {
-    casa: "Casa",
-    brinquedos: "Brinquedos",
-    mecanicos: "Projetos Mecânicos",
-    maquetes: "Maquetes Arquitetônicas",
-    rpg: "RPG",
-    variados: "Variados",
-  };
-  return names[category] || category;
+  return CATEGORY_LABELS[category] || category;
 }

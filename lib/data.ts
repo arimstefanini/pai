@@ -35,15 +35,15 @@ const image = (
 
 export const categories: Category[] = [
   {
-    slug: "casa",
-    name: "Casa",
+    slug: "avatar",
+    name: "Avatar",
     description: "Decoracao, esculturas, vasos e objetos minimalistas.",
     shortDescription: "Decoracao, esculturas, vasos e objetos minimalistas.",
     coverImage: u("photo-1615876235886-7b93c2830d04"),
   },
   {
-    slug: "brinquedos",
-    name: "Brinquedos",
+    slug: "totem",
+    name: "Totem",
     description: "Bonecos, itens criativos e personalizados.",
     shortDescription: "Bonecos, itens criativos e personalizados.",
     coverImage: u("photo-1566576721347-d08810dc9abf"),
@@ -75,7 +75,7 @@ const productConfigs = [
   {
     id: "vaso-orbita",
     nome: "Vaso Órbita",
-    categoria: "casa",
+    categoria: "avatar",
     tipo: "vaso",
     precoOriginal: 120,
     preco: 69,
@@ -92,7 +92,7 @@ const productConfigs = [
   {
     id: "escultura-linhas",
     nome: "Escultura Linhas",
-    categoria: "casa",
+    categoria: "avatar",
     tipo: "escultura",
     precoOriginal: 189,
     preco: 119,
@@ -108,7 +108,7 @@ const productConfigs = [
   {
     id: "luminaria-aurora",
     nome: "Luminária Aurora",
-    categoria: "casa",
+    categoria: "avatar",
     tipo: "luminaria",
     precoOriginal: 165,
     preco: 99,
@@ -124,7 +124,7 @@ const productConfigs = [
   {
     id: "boneco-heroi",
     nome: "Boneco Herói Custom",
-    categoria: "brinquedos",
+    categoria: "avatar",
     tipo: "boneco",
     precoOriginal: 95,
     preco: 59,
@@ -140,7 +140,7 @@ const productConfigs = [
   {
     id: "miniatura-colecao",
     nome: "Miniatura de Coleção",
-    categoria: "brinquedos",
+    categoria: "avatar",
     tipo: "miniatura",
     precoOriginal: 140,
     preco: 89,
@@ -155,7 +155,7 @@ const productConfigs = [
   {
     id: "puzzle-custom",
     nome: "Puzzle Custom 3D",
-    categoria: "brinquedos",
+    categoria: "variados",
     tipo: "puzzle",
     precoOriginal: 130,
     preco: 79,

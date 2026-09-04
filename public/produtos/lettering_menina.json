@@ -2,11 +2,16 @@
   "id": "lettering-menina",
   "title": "Lettering Menina",
   "slug": "lettering-menina",
-  "category": "brinquedos",
+  "category": "totem",
   "featured": false,
   "type": "video",
   "description": "Placa decorativa temática para meninas.",
-  "tags": ["Lettering", "Infantil", "Decoração", "Quarto"],
+  "tags": [
+    "Lettering",
+    "Infantil",
+    "Decoração",
+    "Quarto"
+  ],
   "story": "Transforme o quarto infantil.",
   "cta": "Quero para minha filha",
   "limited": false

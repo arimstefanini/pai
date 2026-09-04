@@ -6,7 +6,11 @@
   "featured": false,
   "type": "video",
   "description": "Painel modular para exibir preços em comércio.",
-  "tags": ["Comercial", "Varejo", "Sinalização"],
+  "tags": [
+    "Comercial",
+    "Varejo",
+    "Sinalização"
+  ],
   "story": "Comunique preços com profissionalismo.",
   "cta": "Quero para meu negócio",
   "limited": false

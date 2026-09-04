@@ -31,7 +31,7 @@ novo-produto.json
   "id": "produto-name",
   "title": "Nome do Produto",
   "slug": "produto-name",
-  "category": "casa",
+  "category": "avatar",
   "featured": false,
   "type": "video",
   "description": "Descrição breve",
@@ -48,7 +48,7 @@ novo-produto.json
 
 O produto aparecerá automaticamente em:
 - Galeria (`/galeria`)
-- Página de categoria (`/categoria/casa`)
+- Página de categoria (`/categoria/avatar`)
 - Página do produto (`/produto/produto-name`)
 - Filtros e busca
 
@@ -95,7 +95,7 @@ Isso é gerenciado pelo hook `useVideoAutoPlay` usando `IntersectionObserver`.
 | `id` | string | ID único (deve ser igual ao nome do arquivo) |
 | `title` | string | Nome exibido |
 | `slug` | string | URL-friendly (usado em links) |
-| `category` | string | Uma de: `casa`, `brinquedos`, `mecanicos`, `maquetes`, `rpg`, `variados` |
+| `category` | string | Uma de: `avatar`, `totem`, `mecanicos`, `maquetes`, `rpg`, `variados` |
 | `featured` | boolean | Aparece em destaque |
 | `type` | string | `image` ou `video` |
 | `description` | string | Descrição breve |
@@ -104,7 +104,7 @@ Isso é gerenciado pelo hook `useVideoAutoPlay` usando `IntersectionObserver`.
 | `cta` | string | Texto do botão |
 | `price` | number | Preço em reais |
 | `limited` | boolean | Edição limitada? |
-| `stock` | number | Quantidade disponível |
+| `stock` | number | Solicitacao sob medida |
 
 ## 🔗 Usando no Código
 
@@ -131,7 +131,7 @@ const product = await loadProductBySlug("vaso-minimalista");
 import { filterProducts } from "@/lib/products";
 
 // Por categoria
-const casa = filterProducts(products, { category: "casa" });
+const avatar = filterProducts(products, { category: "avatar" });
 
 // Por featured
 const featured = filterProducts(products, { featured: true });
@@ -227,7 +227,7 @@ const results = await searchProducts("vaso");
 const featured = await getFeaturedProducts();
 
 // Por categoria com limite
-const casa = await getProductsByCategory("casa", 3);
+const avatar = await getProductsByCategory("avatar", 3);
 ```
 
 ## 📱 Páginas Atualizadas
@@ -236,8 +236,8 @@ Todas essas páginas usam o novo sistema:
 
 - ✅ `/` - Homepage com categorias
 - ✅ `/galeria` - Galeria completa com scroll infinito
-- ✅ `/galeria?categoria=casa` - Filtro por categoria
-- ✅ `/categoria/casa` - Página da categoria
+- ✅ `/galeria?categoria=avatar` - Filtro por categoria
+- ✅ `/categoria/avatar` - Página da categoria
 - ✅ `/produto/[id]` - Página do produto
 
 ## 🧪 Exemplo Completo
@@ -249,7 +249,7 @@ Todas essas páginas usam o novo sistema:
   "id": "vaso-azul",
   "title": "Vaso Azul Minimalista",
   "slug": "vaso-azul",
-  "category": "casa",
+  "category": "avatar",
   "featured": true,
   "type": "image",
   "description": "Vaso em cerâmica azul com design limpo e elegante.",

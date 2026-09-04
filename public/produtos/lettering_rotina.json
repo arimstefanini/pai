@@ -2,11 +2,16 @@
   "id": "lettering-rotina",
   "title": "Quadro de Rotina",
   "slug": "lettering-rotina",
-  "category": "brinquedos",
+  "category": "totem",
   "featured": false,
   "type": "video",
   "description": "Quadro interativo para organizar a rotina das crianças.",
-  "tags": ["Educativo", "Organização", "Infantil", "Parede"],
+  "tags": [
+    "Educativo",
+    "Organização",
+    "Infantil",
+    "Parede"
+  ],
   "story": "Organize a rotina com diversão.",
   "cta": "Quero organizar",
   "limited": false

@@ -155,7 +155,7 @@ export function QuoteRequestForm({ initialMessage = "", product }: QuoteRequestF
 
       <button
         type="submit"
-        className="w-full rounded-full bg-neutral-200 py-3.5 text-sm font-semibold text-black transition hover:bg-white"
+        className="w-full rounded-full py-3.5 text-sm font-semibold text-black transition hover:bg-white"
       >
         Solicitar orçamento personalizado
       </button>

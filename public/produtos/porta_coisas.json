@@ -1,0 +1,18 @@
+{
+  "id": "porta-coisas",
+  "title": "Porta de Coisas",
+  "slug": "porta-coisas",
+  "category": "variados",
+  "featured": false,
+  "type": "video",
+  "description": "Organizador criativo.",
+  "tags": [
+    "Organização",
+    "Criativo",
+    "Decoração"
+  ],
+  "story": "Organize com personalidade.",
+  "cta": "Quero essa",
+  "limited": false,
+  "price": 50
+}

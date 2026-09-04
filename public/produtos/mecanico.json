@@ -1,0 +1,17 @@
+{
+  "id": "mecanico",
+  "title": "Peça Mecânica",
+  "slug": "mecanico",
+  "category": "mecanicos",
+  "featured": false,
+  "type": "image",
+  "description": "Peça mecânica industrial em materiais resistêntes.",
+  "tags": [
+    "decoracao",
+    "avatar",
+    "presente"
+  ],
+  "story": "Para visualizacao previa ou uso industrial.",
+  "cta": "Quero um parecido",
+  "limited": false
+}

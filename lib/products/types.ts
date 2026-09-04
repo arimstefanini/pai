@@ -9,16 +9,42 @@ export type ImageFormat = "jpg" | "jpeg" | "png" | "webp";
 
 export type VideoFormat = "mp4";
 
-export const PRODUCT_CATEGORIES = [
-  "casa",
-  "brinquedos",
-  "mecanicos",
-  "maquetes",
-  "rpg",
-  "variados",
-] as const;
+export enum ProductCategory {
+  AVATAR = "avatar",
+  TOTEM = "totem",
+  MECANICOS = "mecanicos",
+  MAQUETES = "maquetes",
+  RPG = "rpg",
+  VARIADOS = "variados",
+}
 
-export type ProductCategory = (typeof PRODUCT_CATEGORIES)[number];
+export const PRODUCT_CATEGORIES = Object.values(ProductCategory) as ProductCategory[];
+
+export type ProductCategoryValue = ProductCategory;
+
+export const CATEGORY_LABELS: Record<ProductCategory, string> = {
+  [ProductCategory.AVATAR]: "Avatar",
+  [ProductCategory.TOTEM]: "Totem",
+  [ProductCategory.MECANICOS]: "Projetos Mecânicos",
+  [ProductCategory.MAQUETES]: "Maquetes Arquitetônicas",
+  [ProductCategory.RPG]: "RPG",
+  [ProductCategory.VARIADOS]: "Variados",
+};
+
+export const CATEGORY_DESCRIPTIONS: Record<ProductCategory, string> = {
+  [ProductCategory.AVATAR]: "Avatares, Figure Actions, Funko Pop.",
+  [ProductCategory.TOTEM]: "Letreiro, Logos, Placa de identificação, Display.",
+  [ProductCategory.MECANICOS]: "Peças funcionais e soluções práticas.",
+  [ProductCategory.MAQUETES]: "Modelos detalhados para visualização arquitetônica.",
+  [ProductCategory.RPG]: "Torres de dados e acessórios para RPG de mesa.",
+  [ProductCategory.VARIADOS]: "Itens customizados sob demanda.",
+};
+
+export function isValidProductCategory(
+  value: string,
+): value is ProductCategory {
+  return Object.values(ProductCategory).includes(value as ProductCategory);
+}
 
 export type FileFormat = ImageFormat | VideoFormat;
 

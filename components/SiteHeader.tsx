@@ -2,8 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 const categoryMenu = [
-  { href: "/galeria?categoria=casa", label: "CASA" },
-  { href: "/galeria?categoria=brinquedos", label: "BRINQUEDOS" },
+  { href: "/galeria?categoria=avatar", label: "AVATAR" },
+  { href: "/galeria?categoria=totem", label: "TOTEM" },
   { href: "/galeria?categoria=mecanicos", label: "PROJETOS MECÂNICOS" },
   { href: "/galeria?categoria=maquetes", label: "MAQUETES" },
 ];

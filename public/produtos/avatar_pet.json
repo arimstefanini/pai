@@ -1,0 +1,18 @@
+{
+  "id": "avatar_pet",
+  "title": "Avatar Pet",
+  "slug": "avatar_pet",
+  "category": "avatar",
+  "featured": false,
+  "type": "image",
+  "description": "Seu pet eternizado — ideal para prateleiras e presentes.",
+  "tags": [
+    "decoracao",
+    "avatar",
+    "presente"
+  ],
+  "story": "Um item para eternizar seu pet.",
+  "cta": "Quero um parecido",
+  "limited": false,
+  "price": 165
+}

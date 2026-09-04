@@ -9,6 +9,7 @@ import { ProductDetailClient } from "@/components/ProductDetailClient";
 import {
   loadAllProducts,
   loadProductById,
+  loadProductBySlug,
   PRODUCT_CATEGORIES,
   type ProductCategory,
   type ProductMetadata,
@@ -29,7 +30,10 @@ interface ProductPageProps {
  */
 export async function generateStaticParams() {
   const products = await loadAllProducts();
-  return products.map((p) => ({ id: p.metadata.id }));
+  return products.flatMap((p) => [
+    { id: p.metadata.id },
+    { id: p.metadata.slug },
+  ]);
 }
 
 /**
@@ -39,7 +43,7 @@ export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
   const { id } = await params;
-  const product = await loadProductById(id);
+  const product = (await loadProductById(id)) ?? (await loadProductBySlug(id));
 
   if (!product) {
     return { title: "Produto" };
@@ -62,7 +66,7 @@ export default async function ProductPage({
   const { categoria } = await searchParams;
 
   // Load specific product
-  const product = await loadProductById(id);
+  const product = (await loadProductById(id)) ?? (await loadProductBySlug(id));
   if (!product) {
     notFound();
   }

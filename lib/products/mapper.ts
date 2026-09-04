@@ -4,31 +4,17 @@
  */
 
 import type { Product, ProductMetadata, Category } from "./types";
+import {
+  CATEGORY_DESCRIPTIONS,
+  CATEGORY_LABELS,
+  ProductCategory,
+} from "./types";
 
 /**
  * Get all unique categories from products
  */
 export function extractCategories(products: Product[]): Category[] {
   const categoryMap = new Map<string, string>();
-
-  // Define category display names
-  const categoryNames: Record<string, string> = {
-    casa: "Casa",
-    brinquedos: "Brinquedos",
-    mecanicos: "Projetos Mecânicos",
-    maquetes: "Maquetes Arquitetônicas",
-    rpg: "RPG",
-    variados: "Variados",
-  };
-
-  const categoryDescriptions: Record<string, string> = {
-    casa: "Decoração, esculturas, vasos e objetos minimalistas.",
-    brinquedos: "Bonecos, itens criativos e personalizados.",
-    mecanicos: "Peças funcionais e soluções práticas.",
-    maquetes: "Modelos detalhados para visualização arquitetônica.",
-    rpg: "Torres de dados e acessórios para RPG de mesa.",
-    variados: "Itens customizados sob demanda.",
-  };
 
   for (const product of products) {
     const slug = product.metadata.category;
@@ -38,11 +24,14 @@ export function extractCategories(products: Product[]): Category[] {
   }
 
   return Array.from(categoryMap.keys())
-    .map((slug) => ({
-      slug: slug as ProductMetadata["category"],
-      name: categoryNames[slug] || slug,
-      description: categoryDescriptions[slug] || "",
-    }))
+    .map((slug) => {
+      const category = slug as ProductCategory;
+      return {
+        slug: category,
+        name: CATEGORY_LABELS[category] || slug,
+        description: CATEGORY_DESCRIPTIONS[category] || "",
+      };
+    })
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
@@ -98,7 +87,7 @@ export function formatMetadata(metadata: ProductMetadata) {
     stockLabel: typeof metadata.stock === "number"
       ? metadata.stock > 0
         ? `${metadata.stock} em estoque`
-        : "Fora de estoque"
-      : "Quantidade indisponível",
+        : "Solicitação sob medida"
+      : "Solicitação sob medida",
   };
 }

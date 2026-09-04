@@ -1,6 +1,6 @@
 export type CategorySlug =
-  | "casa"
-  | "brinquedos"
+  | "avatar"
+  | "totem"
   | "mecanicos"
   | "maquetes"
   | "variados";

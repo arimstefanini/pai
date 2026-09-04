@@ -28,7 +28,7 @@ export function ProductDetailClient({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory | null>(
-    initialCategory,
+    initialCategory ?? product.metadata.category,
   );
 
   const categories = useMemo(() => extractCategories(allProducts), [allProducts]);
@@ -121,30 +121,28 @@ export function ProductDetailClient({
           <Link
             href={allCategoriesHref}
             onClick={() => applyCategoryFilter(null)}
-            className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
+            className={`rounded-full border px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] transition ${
               selectedCategory === null
-                ? "bg-neutral-900 text-white"
-                : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
+                ? "border-neutral-900 bg-neutral-900 text-white"
+                : "border-neutral-300 bg-white text-neutral-700 hover:border-neutral-900 hover:text-neutral-900"
             }`}
           >
             TODOS
           </Link>
-          {categories
-            .filter((category) => category.slug !== "variados")
-            .map((category) => (
-              <Link
-                key={category.slug}
-                href={getCategoryHref(category.slug)}
-                onClick={() => applyCategoryFilter(category.slug)}
-                className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
-                  selectedCategory === category.slug
-                    ? "bg-neutral-900 text-white"
-                    : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
-                }`}
-              >
-                {category.name.toUpperCase()}
-              </Link>
-            ))}
+          {categories.map((category) => (
+            <Link
+              key={category.slug}
+              href={getCategoryHref(category.slug)}
+              onClick={() => applyCategoryFilter(category.slug)}
+              className={`rounded-full border px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] transition ${
+                selectedCategory === category.slug
+                  ? "border-neutral-900 bg-neutral-900 text-white"
+                  : "border-neutral-300 bg-white text-neutral-700 hover:border-neutral-900 hover:text-neutral-900"
+              }`}
+            >
+              {category.name.toUpperCase()}
+            </Link>
+          ))}
         </div>
       </div>
 
@@ -157,7 +155,7 @@ export function ProductDetailClient({
             className="grid gap-4 rounded-2xl border border-neutral-200 bg-white p-4 sm:grid-cols-[1fr_1fr] sm:items-center"
           >
             {/* Media */}
-            <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-neutral-100">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-xl ">
               <ProductMedia
                 id={`${item.metadata.id}-${index}`}
                 media={item.media}

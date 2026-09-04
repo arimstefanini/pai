@@ -2,11 +2,16 @@
   "id": "placa-escritorio",
   "title": "Placa Escritório",
   "slug": "placa-escritorio",
-  "category": "casa",
+  "category": "totem",
   "featured": false,
   "type": "video",
   "description": "Placa motivacional para sua mesa de trabalho.",
-  "tags": ["Escritório", "Motivação", "Decoração", "Trabalho"],
+  "tags": [
+    "Escritório",
+    "Motivação",
+    "Decoração",
+    "Trabalho"
+  ],
   "story": "Inspire-se diariamente.",
   "cta": "Quero para meu espaço",
   "limited": false

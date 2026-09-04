@@ -1,0 +1,18 @@
+{
+  "id": "funko_pop",
+  "title": "Avatar Decorativo",
+  "slug": "funko_pop",
+  "category": "avatar",
+  "featured": false,
+  "type": "image",
+  "description": "Funko Pop personalizado, com aquilo que te indentifica.",
+  "tags": [
+    "decoracao",
+    "avatar",
+    "presente"
+  ],
+  "story": "Um item divertido que traz personalidade ao ambiente e topping de bolos.",
+  "cta": "Quero um parecido",
+  "limited": false,
+  "price": 430
+}

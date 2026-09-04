@@ -1,0 +1,18 @@
+{
+  "id": "avatar_realístico_mini",
+  "title": "Avatar Realístico mini",
+  "slug": "avatar_realístico_mini",
+  "category": "avatar",
+  "featured": false,
+  "type": "image",
+  "description": "Uma miniatuara realística 5cm.",
+  "tags": [
+    "decoracao",
+    "avatar",
+    "presente"
+  ],
+  "story": "Um item divertido que traz personalidade ao ambiente.",
+  "cta": "Quero um parecido",
+  "limited": false,
+  "price": 180
+}
