@@ -181,7 +181,7 @@ import { ProductGallery } from "@/components/ProductGallery";
 
 <ProductGallery
   products={products}
-  title="Inspirações"
+  title="Inspiração"
   subtitle="Veja nossas criações"
 />
 ```

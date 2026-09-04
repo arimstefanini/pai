@@ -144,7 +144,7 @@ export function ProductDetailClient({
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-semibold text-neutral-900 sm:text-3xl">
-          Inspirações de produto
+          Inspiração
         </h1>
         <p className="mt-2 text-sm text-neutral-600">
           Explore nossa galeria de produtos personalizados.
