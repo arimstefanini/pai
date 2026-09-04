@@ -61,14 +61,9 @@ export function ProductDetailClient({
   );
 
   const orderedProducts = useMemo(() => {
-    const source = filteredProducts.length > 0 ? filteredProducts : allProducts;
-    const startIndex = Math.max(
-      0,
-      source.findIndex((item) => item.metadata.id === product.metadata.id),
-    );
-    const base = [...source.slice(startIndex), ...source.slice(0, startIndex)];
-    return [...base, ...base, ...base, ...base]; // Loop for infinite scroll
-  }, [allProducts, filteredProducts, product.metadata.id]);
+    // Use the available list only once — do not repeat items.
+    return filteredProducts.length > 0 ? filteredProducts : allProducts;
+  }, [allProducts, filteredProducts]);
 
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
@@ -200,18 +195,18 @@ export function ProductDetailClient({
             </Link>
 
             {/* Content */}
-            <div>
+            <div className="min-w-0">
               <Link href={getProductHref(item)} className="block">
-                <h2 className="text-2xl font-semibold tracking-tight text-neutral-900">
+                <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-neutral-900 break-words">
                   {item.metadata.title}
                 </h2>
               </Link>
-              <p className="mt-3 leading-relaxed text-neutral-600">
+              <p className="mt-3 leading-relaxed text-neutral-600 break-words">
                 {item.metadata.description}
               </p>
 
               <div className="mt-4 flex flex-wrap items-baseline gap-3">
-                <span className="text-2xl font-semibold text-neutral-900">
+                <span className="text-xl sm:text-2xl font-semibold text-neutral-900">
                   {formatPrice(item.metadata.price)}
                 </span>
               </div>

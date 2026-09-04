@@ -17,7 +17,7 @@ export function Button({
   return (
     <button
       className={cn(
-        "px-6 py-3 rounded-[var(--radius-lg)] font-medium transition-all duration-200 hover:-translate-y-0.5",
+        "px-4 py-2 sm:px-6 sm:py-3 rounded-[var(--radius-lg)] font-medium transition-all duration-200 hover:-translate-y-0.5",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50",
         variant === "primary" &&
           "bg-brand-primary text-background hover:opacity-90 active:opacity-80",

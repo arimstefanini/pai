@@ -11,13 +11,13 @@ export function ProductActionButtons({ onPurchase, productName, compact = false 
   const sizeClass = compact ? "h-11" : "h-12";
 
   return (
-    <div className="flex gap-2 sm:gap-3">
-      <Button onClick={onPurchase} className={`flex-1 rounded-full ${sizeClass} text-sm font-semibold`}>
+    <div className="flex gap-2 sm:gap-3 min-w-0">
+      <Button onClick={onPurchase} className={`flex-1 rounded-full min-w-0 ${sizeClass} text-sm font-semibold break-words`}>
         Comprar agora
       </Button>
       <CustomCTA
         productName={productName}
-        className={`inline-flex flex-1 items-center justify-center rounded-full border border-border bg-background ${sizeClass} text-sm font-semibold text-text-primary transition hover:bg-surface active:scale-[0.98]`}
+        className={`inline-flex flex-1 items-center justify-center min-w-0 rounded-full border border-border bg-background ${sizeClass} text-sm font-semibold text-text-primary transition hover:bg-surface active:scale-[0.98] break-words`}
       />
     </div>
   );

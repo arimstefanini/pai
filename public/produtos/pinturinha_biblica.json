@@ -1,6 +1,6 @@
 {
   "id": "pinturinha-biblica",
-  "title": "Pintura Biblica",
+  "title": "Personagem biblicos para pintura",
   "slug": "pinturinha-biblica",
   "category": "variados",
   "featured": false,
@@ -15,5 +15,5 @@
   "story": "Tranquilidade em cores.",
   "cta": "Quero esse quadro",
   "limited": true,
-  "price": 40
+  "price": 18
 }

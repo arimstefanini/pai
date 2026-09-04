@@ -33,7 +33,7 @@ export function getMediaTypeLabel(type: MediaType): string {
  * Format price as currency
  */
 export function formatPrice(price: number | undefined, locale = "pt-BR"): string {
-  if (price === undefined || price === null) return "Sob Consulta";
+  if (price === undefined || price === null) return "Prço sob consulta";
   const formatted = new Intl.NumberFormat(locale, {
     style: "currency",
     currency: "BRL",
