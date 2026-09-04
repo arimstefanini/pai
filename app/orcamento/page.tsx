@@ -30,7 +30,7 @@ export default async function OrcamentoPage({ searchParams }: Props) {
               Envie sua ideia
             </h1>
             <p className="mt-4 leading-relaxed text-neutral-300">
-              Preencha o formulário com os detalhes do projeto. Quanto mais contexto,
+              Preencha o formulário com os detalhes do projeto. Quanto mais informações,
               mais rápido conseguimos te responder com uma proposta.
             </p>
             <p className="mt-4 text-sm text-neutral-400">
