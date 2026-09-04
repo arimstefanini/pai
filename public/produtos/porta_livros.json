@@ -9,7 +9,5 @@
   "tags": ["Organização", "Biblioteca", "Parede"],
   "story": "Suas histórias em destaque.",
   "cta": "Quero um",
-  "price": 69,
-  "limited": false,
-  "stock": 13
+  "limited": false
 }

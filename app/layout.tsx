@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import "./globals.css";
+import { Comfortaa, Orbitron } from 'next/font/google';
+
+const comfortaa = Comfortaa({ subsets: ['latin'], weight: '400', display: 'swap', variable: '--font-body' });
+const orbitron = Orbitron({ subsets: ['latin'], weight: '400', display: 'swap', variable: '--font-heading' });
 
 export const metadata: Metadata = {
   title: {
@@ -20,7 +24,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className="h-full scroll-smooth antialiased"
+      className={`${comfortaa.variable} ${orbitron.variable} h-full scroll-smooth antialiased`}
     >
       <body className="relative min-h-full overflow-x-hidden bg-neutral-50 font-sans text-neutral-900">
         <div className="global-axes-bg" aria-hidden="true">

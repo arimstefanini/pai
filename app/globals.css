@@ -3,12 +3,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #2e2e2e;
+  --background: #868686;
   --surface: #2e2e2e;
-  --text-primary: #d4d4d4;
-  --text-secondary: #bdbdbd;
+  --text-primary: #ffffff;
+  --title-color: #2A628F;
+  --link-hover: #D9A74A;
+  --text-secondary: #d4d4d4;
   --brand-primary: #000000;
-  --brand-accent: #ff6b35;
+  --brand-accent: #D9A74A;
   --border: #e5e5e5;
   --success: #16a34a;
   --danger: #dc2626;
@@ -18,9 +20,9 @@
   --background: #111111;
   --surface: #171717;
   --text-primary: #d4d4d4;
-  --text-secondary: #a3a3a3;
-  --brand-primary: #f5f5f5;
-  --brand-accent: #ff6b35;
+  --text-secondary: #52728C;
+  --brand-primary: #2A3B49;
+  --brand-accent: #D9A74A;
   --border: #2e2e2e;
   --success: #22c55e;
   --danger: #ef4444;
@@ -51,7 +53,8 @@
   --animate-fade-in: fade-in 320ms ease-out;
   --animate-float: float 2.2s ease-in-out infinite;
 
-  --font-sans: Inter, var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body, ui-sans-serif, system-ui, sans-serif);
+  --font-heading: var(--font-heading, ui-sans-serif, system-ui, sans-serif);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -80,10 +83,37 @@ html {
   scroll-behavior: smooth;
 }
 
+html, body {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Headings use the heading font variable */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading) !important;
+  color: var(--title-color) !important;
+}
+
+/* Ensure headings keep the title color even when Tailwind text utilities are present */
+h1[class*="text-"],
+h2[class*="text-"],
+h3[class*="text-"],
+h4[class*="text-"],
+h5[class*="text-"],
+h6[class*="text-"] {
+  color: var(--title-color) !important;
+}
+
+/* Links hover color */
+a:hover,
+.hover\:text-neutral-900:hover,
+.hover\:text-neutral-700:hover,
+.hover\:text-neutral-800:hover {
+  color: var(--link-hover) !important;
+}
+
 body {
   background: var(--background);
   color: var(--text-primary);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Ajuste global apenas de cores para o tema escuro solicitado */
@@ -92,16 +122,6 @@ body {
   background-color: #2e2e2e !important;
 }
 
-.text-neutral-900,
-.text-neutral-800 {
-  color: #f5f5f5 !important;
-}
-
-.text-neutral-700,
-.text-neutral-600,
-.text-neutral-500 {
-  color: #d4d4d4 !important;
-}
 
 .border-neutral-100,
 .border-neutral-200,
@@ -204,3 +224,26 @@ body {
   transform: translate(-50%, -22%) rotate(19deg) skewY(10deg);
   box-shadow: 0 0 6px rgba(74, 163, 107, 0.2);
 }
+
+/* Force Tailwind's utility class to use the site variable font */
+.font-sans {
+  font-family: var(--font-sans) !important;
+}
+
+/* Force common Tailwind text utilities to use the site's primary text color */
+.text-white,
+.text-neutral-50,
+.text-neutral-100,
+.text-neutral-200,
+.text-neutral-300,
+.text-neutral-400,
+.text-neutral-500,
+.text-neutral-600,
+.text-neutral-700,
+.text-neutral-800,
+.text-neutral-900,
+.text-text-primary,
+.text-text-secondary {
+  color: var(--text-primary) !important;
+}
+

@@ -24,14 +24,14 @@ export function SiteHeader() {
           <Image
             src="/image/logo.png"
             alt="Stefanini Produções"
-            width={40}
-            height={40}
-            className="h-10 w-10"
+            width={456}
+            height={456}
+            className="h-10 w-auto rounded-md"
             priority
           />
-          <span className="text-xs font-semibold tracking-tight text-neutral-200 sm:text-sm">
+          {/* <span className="text-xs font-semibold tracking-tight text-neutral-200 sm:text-sm">
             Stefanini<span className="text-neutral-400">Produções</span>
-          </span>
+          </span> */}
         </Link>
         <nav className="flex items-center gap-1 sm:gap-4" aria-label="Principal">
           <div className="group relative">

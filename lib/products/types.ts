@@ -58,13 +58,13 @@ export interface ProductMetadata {
   cta: string;
 
   /** Price in currency units */
-  price: number;
+  price?: number;
 
   /** Limited edition indicator */
   limited: boolean;
 
   /** Current stock quantity */
-  stock: number;
+  stock?: number;
 }
 
 /**

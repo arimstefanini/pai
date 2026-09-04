@@ -9,7 +9,5 @@
   "tags": ["Cozinha", "Organização", "Chá"],
   "story": "Organize seu ritual de chá.",
   "cta": "Quero um",
-  "price": 29,
-  "limited": false,
-  "stock": 22
+  "limited": false
 }

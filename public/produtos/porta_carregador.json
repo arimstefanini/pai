@@ -9,7 +9,5 @@
   "tags": ["Organização", "Tecnologia", "Mesa"],
   "story": "Cabos organizados, espaço limpo.",
   "cta": "Quero organizar meus cabos",
-  "price": 39,
-  "limited": false,
-  "stock": 16
+  "limited": false
 }

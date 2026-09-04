@@ -77,11 +77,19 @@ function sortProducts(
       break;
 
     case "price-asc":
-      sorted.sort((a, b) => a.metadata.price - b.metadata.price);
+      sorted.sort((a, b) => {
+        const pa = typeof a.metadata.price === "number" ? a.metadata.price : Number.POSITIVE_INFINITY;
+        const pb = typeof b.metadata.price === "number" ? b.metadata.price : Number.POSITIVE_INFINITY;
+        return pa - pb;
+      });
       break;
 
     case "price-desc":
-      sorted.sort((a, b) => b.metadata.price - a.metadata.price);
+      sorted.sort((a, b) => {
+        const pa = typeof a.metadata.price === "number" ? a.metadata.price : Number.NEGATIVE_INFINITY;
+        const pb = typeof b.metadata.price === "number" ? b.metadata.price : Number.NEGATIVE_INFINITY;
+        return pb - pa;
+      });
       break;
 
     case "newest":

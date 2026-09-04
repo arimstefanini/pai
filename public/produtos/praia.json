@@ -9,7 +9,5 @@
   "tags": ["Arte", "Quadro", "Praia", "Verão"],
   "story": "Traga a praia para sua casa.",
   "cta": "Quero esse quadro",
-  "price": 149,
-  "limited": false,
-  "stock": 4
+  "limited": false
 }

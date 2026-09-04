@@ -9,7 +9,5 @@
   "tags": ["Temático", "Pokémon", "Quadro", "Infantil"],
   "story": "Capture a magia Pokémon.",
   "cta": "Quero esse quadro",
-  "price": 99,
-  "limited": false,
-  "stock": 5
+  "limited": false
 }

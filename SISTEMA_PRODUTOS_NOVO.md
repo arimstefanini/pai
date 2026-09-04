@@ -38,9 +38,9 @@ novo-produto.json
   "tags": ["tag1", "tag2"],
   "story": "A história do produto",
   "cta": "Quero algo parecido",
-  "price": 99,
+  //"price": 99,
   "limited": false,
-  "stock": 10
+  //"stock": 10
 }
 ```
 
@@ -151,7 +151,7 @@ import {
 
 const categories = extractCategories(products);
 const priceStr = formatPrice(99); // "R$ 99"
-const stock = getStockStatus(product); // { label: "5 em estoque", status: "low" }
+//const stock = getStockStatus(product); // { label: "5 em estoque", status: "low" }
 ```
 
 ## 📊 Componentes Reutilizáveis
@@ -256,9 +256,9 @@ Todas essas páginas usam o novo sistema:
   "tags": ["vaso", "azul", "minimalismo", "decoração"],
   "story": "Simplicidade que impressiona.",
   "cta": "Quero um parecido",
-  "price": 149,
+  //"price": 149,
   "limited": false,
-  "stock": 12
+  //"stock": 12
 }
 ```
 

@@ -9,7 +9,5 @@
   "tags": ["Arte", "Quadro", "Decoração", "Parede"],
   "story": "Tranquilidade em cores.",
   "cta": "Quero esse quadro",
-  "price": 179,
-  "limited": true,
-  "stock": 2
+  "limited": true
 }

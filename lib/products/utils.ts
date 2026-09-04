@@ -27,7 +27,8 @@ export function getMediaTypeLabel(type: MediaType): string {
 /**
  * Format price as currency
  */
-export function formatPrice(price: number, locale = "pt-BR"): string {
+export function formatPrice(price: number | undefined, locale = "pt-BR"): string {
+  if (price === undefined || price === null) return "";
   return new Intl.NumberFormat(locale, {
     style: "currency",
     currency: "BRL",
@@ -54,14 +55,18 @@ export function getCategoryUrl(category: string): string {
  * Check if product has low stock
  */
 export function isLowStock(product: Product, threshold = 5): boolean {
-  return product.metadata.stock > 0 && product.metadata.stock <= threshold;
+  const s = product.metadata.stock;
+  if (typeof s !== "number") return false;
+  return s > 0 && s <= threshold;
 }
 
 /**
  * Check if product is out of stock
  */
 export function isOutOfStock(product: Product): boolean {
-  return product.metadata.stock <= 0;
+  const s = product.metadata.stock;
+  if (typeof s !== "number") return false;
+  return s <= 0;
 }
 
 /**
@@ -70,6 +75,15 @@ export function isOutOfStock(product: Product): boolean {
 export function getStockStatus(
   product: Product,
 ): { label: string; status: "available" | "low" | "out" } {
+  const s = product.metadata.stock;
+
+  if (typeof s !== "number") {
+    return {
+      label: "Quantidade indisponível",
+      status: "out",
+    };
+  }
+
   if (isOutOfStock(product)) {
     return {
       label: "Fora de estoque",
@@ -79,13 +93,13 @@ export function getStockStatus(
 
   if (isLowStock(product)) {
     return {
-      label: `Apenas ${product.metadata.stock} em estoque`,
+      label: `Apenas ${s} em estoque`,
       status: "low",
     };
   }
 
   return {
-    label: `${product.metadata.stock} disponível`,
+    label: `${s} disponível`,
     status: "available",
   };
 }

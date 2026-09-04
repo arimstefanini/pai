@@ -12,7 +12,7 @@ function Badge({ children, variant = "default" }: { children: React.ReactNode; v
   const classes =
     variant === "attention"
       ? "bg-amber-100 text-amber-900 ring-amber-200"
-      : "bg-white/90 text-neutral-800 ring-neutral-200";
+      : "text-neutral-800 ring-neutral-200";
 
   return (
     <span className={`rounded-full px-2.5 py-1 text-xs font-semibold shadow-sm ring-1 ${classes}`}>

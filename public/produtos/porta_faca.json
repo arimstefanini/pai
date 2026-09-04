@@ -9,7 +9,5 @@
   "tags": ["Cozinha", "Organização", "Utensílio"],
   "story": "Cozinhe com segurança e estilo.",
   "cta": "Quero um",
-  "price": 79,
-  "limited": false,
-  "stock": 9
+  "limited": false
 }

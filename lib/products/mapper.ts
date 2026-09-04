@@ -89,10 +89,16 @@ export function formatMetadata(metadata: ProductMetadata) {
     description: metadata.description,
     story: metadata.story,
     cta: metadata.cta,
-    priceFormatted: new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(metadata.price),
-    stockLabel: metadata.stock > 0 ? `${metadata.stock} em estoque` : "Fora de estoque",
+    priceFormatted: typeof metadata.price === "number"
+      ? new Intl.NumberFormat("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }).format(metadata.price)
+      : "",
+    stockLabel: typeof metadata.stock === "number"
+      ? metadata.stock > 0
+        ? `${metadata.stock} em estoque`
+        : "Fora de estoque"
+      : "Quantidade indisponível",
   };
 }

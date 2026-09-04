@@ -9,7 +9,5 @@
   "tags": ["Arquitetura", "Modelo", "Projeto", "Profissional"],
   "story": "Visualize seu projeto em 3D.",
   "cta": "Quero uma maquete do meu projeto",
-  "price": 599,
-  "limited": false,
-  "stock": 2
+  "limited": false
 }

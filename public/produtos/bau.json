@@ -9,7 +9,5 @@
   "tags": ["Armazenamento", "Personalizado", "Funcional"],
   "story": "Guarde suas memórias com estilo.",
   "cta": "Quero algo parecido",
-  "price": 349,
-  "limited": true,
-  "stock": 3
+  "limited": true
 }

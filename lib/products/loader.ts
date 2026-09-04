@@ -63,7 +63,7 @@ async function loadMetadata(filePath: string): Promise<ProductMetadata | null> {
     const content = await readFile(filePath, "utf-8");
     const metadata = JSON.parse(content);
 
-    // Validate required fields
+    // Validate required fields (price and stock are optional)
     if (
       !metadata.id ||
       !metadata.title ||
@@ -75,9 +75,7 @@ async function loadMetadata(filePath: string): Promise<ProductMetadata | null> {
       !metadata.tags ||
       !metadata.story ||
       !metadata.cta ||
-      metadata.price === undefined ||
-      metadata.limited === undefined ||
-      metadata.stock === undefined
+      metadata.limited === undefined
     ) {
       console.warn(`Invalid metadata in ${filePath}: missing required fields`);
       return null;
