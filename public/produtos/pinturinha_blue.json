@@ -1,11 +1,11 @@
 {
   "id": "pinturinha-blue",
-  "title": "Pintura Azul",
+  "title": "Eternize a obra de arte do seu filho",
   "slug": "pinturinha-blue",
   "category": "variados",
   "featured": false,
   "type": "video",
-  "description": "Quadro artístico com tons azuis para decoração.",
+  "description": "Quadro artístico para pintura.",
   "tags": [
     "Arte",
     "Quadro",
@@ -15,5 +15,5 @@
   "story": "Tranquilidade em cores.",
   "cta": "Quero esse quadro",
   "limited": true,
-  "price": 40
+  "price": 10
 }

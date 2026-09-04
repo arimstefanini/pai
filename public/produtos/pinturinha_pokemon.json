@@ -1,11 +1,11 @@
 {
   "id": "pinturinha-pokemon",
-  "title": "Quadro Pokémon",
+  "title": "Quadro de pintura do seu personagem favorito",
   "slug": "pinturinha-pokemon",
   "category": "variados",
   "featured": false,
   "type": "video",
-  "description": "Quadro temático Pokémon para fãs da série.",
+  "description": "Quadro temático de para fãs da série.",
   "tags": [
     "Temático",
     "Pokémon",
@@ -15,5 +15,5 @@
   "story": "Capture a magia Pokémon.",
   "cta": "Quero esse quadro",
   "limited": false,
-  "price": 40
+  "price": 10
 }
