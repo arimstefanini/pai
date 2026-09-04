@@ -35,10 +35,12 @@ export default async function GaleriaPage({ searchParams }: GaleriaPageProps) {
   // Get available categories
   const availableCategories = new Set(extractCategories(allProducts).map((category) => category.slug));
 
+  const normalizedCategory = categoria === "todos" ? null : categoria;
+
   // Validate requested category
   const initialCategory: ProductMetadata["category"] | null =
-    categoria && isProductCategory(categoria) && availableCategories.has(categoria)
-      ? categoria
+    normalizedCategory && isProductCategory(normalizedCategory) && availableCategories.has(normalizedCategory)
+      ? normalizedCategory
       : null;
 
   // Get first featured product or fallback to first product

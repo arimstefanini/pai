@@ -27,11 +27,30 @@ export function ProductDetailClient({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [selectedCategory, setSelectedCategory] = useState<ProductCategory | null>(
-    initialCategory ?? product.metadata.category,
-  );
+  const [selectedCategory, setSelectedCategory] = useState<ProductCategory | null>(() => {
+    if (initialCategory) return initialCategory;
+    return pathname.startsWith("/produto/") ? product.metadata.category : null;
+  });
 
   const categories = useMemo(() => extractCategories(allProducts), [allProducts]);
+
+  useEffect(() => {
+    const rawCategory = searchParams.get("categoria");
+
+    if (rawCategory && rawCategory !== "todos") {
+      const isValidCategory = categories.some((category) => category.slug === rawCategory);
+      setSelectedCategory(isValidCategory ? (rawCategory as ProductCategory) : null);
+      setVisibleCount(PAGE_SIZE);
+      return;
+    }
+
+    if (pathname.startsWith("/produto/")) {
+      setSelectedCategory(product.metadata.category);
+    } else {
+      setSelectedCategory(null);
+    }
+    setVisibleCount(PAGE_SIZE);
+  }, [categories, pathname, product.metadata.category, searchParams]);
 
   const filteredProducts = useMemo(
     () =>
@@ -76,6 +95,21 @@ export function ProductDetailClient({
     },
     [pathname, searchParams],
   );
+
+  const getProductHref = useCallback(
+    (productItem: Product) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (selectedCategory) {
+        params.set("categoria", selectedCategory);
+      } else {
+        params.delete("categoria");
+      }
+      const query = params.toString();
+      return query ? `/produto/${productItem.metadata.slug}?${query}` : `/produto/${productItem.metadata.slug}`;
+    },
+    [searchParams, selectedCategory],
+  );
+
   const applyCategoryFilter = useCallback(
     (category: ProductMetadata["category"] | null) => {
       setSelectedCategory(category);
@@ -155,19 +189,23 @@ export function ProductDetailClient({
             className="grid gap-4 rounded-2xl border border-neutral-200 bg-white p-4 sm:grid-cols-[1fr_1fr] sm:items-center"
           >
             {/* Media */}
-            <div className="relative aspect-[4/3] overflow-hidden rounded-xl ">
-              <ProductMedia
-                id={`${item.metadata.id}-${index}`}
-                media={item.media}
-                label={item.metadata.title}
-              />
-            </div>
+            <Link href={getProductHref(item)} className="block">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-xl ">
+                <ProductMedia
+                  id={`${item.metadata.id}-${index}`}
+                  media={item.media}
+                  label={item.metadata.title}
+                />
+              </div>
+            </Link>
 
             {/* Content */}
             <div>
-              <h2 className="text-2xl font-semibold tracking-tight text-neutral-900">
-                {item.metadata.title}
-              </h2>
+              <Link href={getProductHref(item)} className="block">
+                <h2 className="text-2xl font-semibold tracking-tight text-neutral-900">
+                  {item.metadata.title}
+                </h2>
+              </Link>
               <p className="mt-3 leading-relaxed text-neutral-600">
                 {item.metadata.description}
               </p>
